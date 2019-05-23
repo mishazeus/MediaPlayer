@@ -24,5 +24,11 @@ namespace MediaPlayer
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.frame.Navigate(new Library());
+        }
     }
 }

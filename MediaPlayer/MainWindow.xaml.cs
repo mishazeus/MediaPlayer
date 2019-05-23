@@ -12,6 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
+using System.Threading;
+using System.IO;
+using System.Xml;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 
 namespace MediaPlayer
 {
@@ -23,7 +30,19 @@ namespace MediaPlayer
         public MainWindow()
         {
             InitializeComponent();
-            frame.Navigate(new Page1());
+            WindowState = WindowState.Normal;
+            WindowState = WindowState.Maximized;
+            RootGrid.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            RootGrid.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+
+            frame.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            frame.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            frame.Navigate(new Library());
+
+            
+            
         }
+
+       
     }
 }

@@ -8,14 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
 
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="542,255,183,175" VerticalAlignment="Center" Width="75"/>
-        <TextBox HorizontalAlignment="Center" Height="20" Margin="203,255,263,175" TextWrapping="Wrap" VerticalAlignment="Center" Width="334"/>
-        <Image HorizontalAlignment="Center" Height="90" Margin="328,114,320,246" VerticalAlignment="Center" Width="152" Source="Resurses/DLNA_logo.jpg">
+    <Grid Background="White">
+        <Button Content="Search" HorizontalAlignment="Center" Margin="330,238,395,192" VerticalAlignment="Center" Width="75"/>
+        <TextBox HorizontalAlignment="Center" Height="20" Margin="240,199,226,231" TextWrapping="Wrap" VerticalAlignment="Center" Width="334"/>
+        <Image HorizontalAlignment="Center" Height="90" Margin="330,87,318,273" VerticalAlignment="Center" Width="152" Source="Resurses/DLNA_logo.jpg">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="Resurses/DLNA_logo.jpg" Stretch="Uniform"/>
             </Image.OpacityMask>
         </Image>
+        <Button Content="Library" HorizontalAlignment="Center" Margin="410,238,315,192" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Page>
