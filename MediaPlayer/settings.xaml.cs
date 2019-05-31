@@ -16,19 +16,14 @@ using System.Windows.Shapes;
 namespace MediaPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для Page1.xaml
+    /// Логика взаимодействия для settings.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class settings : Page
     {
-        public Page1()
+        public settings()
         {
             InitializeComponent();
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mw = new MainWindow();
-            mw.frame.Navigate(new Library());
         }
     }
 }

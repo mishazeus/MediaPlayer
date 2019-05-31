@@ -83,11 +83,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutFilm.xaml.cs">
+      <DependentUpon>AboutFilm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DLNADevice.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="settings.xaml.cs">
+      <DependentUpon>settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SSDP.cs" />
-    <Page Include="Library.xaml">
+    <Page Include="AboutFilm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,22 +107,16 @@
     </Compile>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="FilmInfo.cs" />
-    <Compile Include="Library.xaml.cs">
-      <DependentUpon>Library.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Page1.xaml">
+    <Page Include="settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

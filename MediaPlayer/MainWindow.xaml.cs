@@ -17,6 +17,7 @@ using System.Threading;
 using System.IO;
 using System.Xml;
 using System.Diagnostics;
+using System.Collections;
 using System.Net;
 using System.Net.Sockets;
 
@@ -27,20 +28,77 @@ namespace MediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Film> films;
+
         public MainWindow()
         {
             InitializeComponent();
             WindowState = WindowState.Normal;
             WindowState = WindowState.Maximized;
-            RootGrid.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
-            RootGrid.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+
+            
 
             frame.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             frame.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-            frame.Navigate(new Library());
+            frame.Navigate(new AboutFilm());
 
-            
-            
+            films = new List<Film>();
+
+            CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
+            DataContext = this;
+           
+  
+        }
+
+        List<Film> BD(string command, List<Film> list) {
+            SQLiteConnection db = new SQLiteConnection();
+
+            string filmid=""; string name=""; string directorid=""; string studioid=""; string duratiom=""; string pathlogo=""; string ratingid=""; string pathfilm="";
+
+            try
+            {
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
+
+                    cmdSelect.CommandText = command ;
+                    
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Film film;
+                        for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
+                        {
+                            switch (colCtr)
+                            {
+                                case 0: { filmid = reader.GetValue(colCtr).ToString(); } break;
+                                case 1: { name = reader.GetValue(colCtr).ToString(); } break;
+                                case 2: { directorid = reader.GetValue(colCtr).ToString(); } break;
+                                case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
+                                case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
+                                case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
+                                case 6: { ratingid = reader.GetValue(colCtr).ToString(); } break;
+                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;    
+                            }
+                        }
+                        film = new Film(filmid, name, directorid, studioid, duratiom, pathlogo, ratingid, pathfilm);
+                        list.Add(film);
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            finally
+            {
+                // delete(IDisposable)db;
+            }
+            return list;
         }
 
        

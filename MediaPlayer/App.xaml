@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:MediaPlayer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style x:Key="SearchTB" TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="BlueViolet"/>
+            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        </Style>
+
+        <ControlTemplate x:Key="TextBoxSearch" TargetType="TextBox">
+            <Border BorderThickness="2" CornerRadius="7">
+                <Border.Background>
+                    <SolidColorBrush Color="LightGray"/>
+                </Border.Background>
+            </Border>
+        </ControlTemplate>
     </Application.Resources>
 </Application>
