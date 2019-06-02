@@ -89,6 +89,9 @@
     <Compile Include="DLNADevice.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="PlayFilm.xaml.cs">
+      <DependentUpon>PlayFilm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlayFilm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

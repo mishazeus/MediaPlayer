@@ -11,11 +11,14 @@
         </Style>
 
         <ControlTemplate x:Key="TextBoxSearch" TargetType="TextBox">
-            <Border BorderThickness="2" CornerRadius="7">
-                <Border.Background>
-                    <SolidColorBrush Color="LightGray"/>
-                </Border.Background>
+            <Border x:Name="border" Background="LightGray" CornerRadius="7">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
             </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
         </ControlTemplate>
     </Application.Resources>
 </Application>

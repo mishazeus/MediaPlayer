@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace MediaPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для AboutFilm.xaml
+    /// Логика взаимодействия для PlayFilm.xaml
     /// </summary>
-    public partial class AboutFilm : Page
+    public partial class PlayFilm : Page
     {
-        public AboutFilm(Film film)
+        public PlayFilm()
         {
             InitializeComponent();
-            DataContext = film;
-            fText.Text = "";
-            aText.Text = "";
-           
-         
         }
-
     }
 }

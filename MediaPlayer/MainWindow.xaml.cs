@@ -36,18 +36,16 @@ namespace MediaPlayer
             WindowState = WindowState.Normal;
             WindowState = WindowState.Maximized;
 
-            
 
-            frame.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
-            frame.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-            frame.Navigate(new AboutFilm());
+            //frame.height = system.windows.systemparameters.primaryscreenheight;
+            //frame.width = system.windows.systemparameters.primaryscreenwidth;
+
 
             films = new List<Film>();
 
             CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
             DataContext = this;
-           
-  
+
         }
 
         List<Film> BD(string command, List<Film> list) {
@@ -96,11 +94,15 @@ namespace MediaPlayer
             }
             finally
             {
-                // delete(IDisposable)db;
+              //   delete(IDisposable)db;
             }
             return list;
         }
 
-       
+        private void CinemaList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            frame.Navigate(new AboutFilm(films[CinemaList.SelectedIndex]));
+        }
     }
 }

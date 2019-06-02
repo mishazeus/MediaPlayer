@@ -30,7 +30,7 @@ Title="MainWindow" Height="450" Width="800">
             </Grid.ColumnDefinitions>
 
             <Frame x:Name="frame" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.Column="3" Background="#FF191E89"/>
-            <ListView x:Name="CinemaList" Grid.Row="1" Grid.Column="1" >
+            <ListView x:Name="CinemaList" Grid.Row="1" Grid.Column="1" SelectionChanged="CinemaList_SelectionChanged" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
