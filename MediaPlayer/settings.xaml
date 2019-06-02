@@ -9,7 +9,19 @@
       Title="settings">
 
     <Grid Background="#FFF9F9F9">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="37,80,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="1" Grid.Row="2"/>
 
     </Grid>
 </Page>

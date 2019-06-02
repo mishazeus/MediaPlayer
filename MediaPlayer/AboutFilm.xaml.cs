@@ -25,11 +25,19 @@ namespace MediaPlayer
         {
             InitializeComponent();
             DataContext = film;
-            fText.Text = "";
-            aText.Text = "";
+            //fYear.Text = film.;
+            fName.Text = film.Name;
+            fDirector.Text = film.DirectorID;
+            fRating.Text = film.ratingID;
+
+            //aText.Text = "";
            
          
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

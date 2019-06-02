@@ -104,5 +104,10 @@ namespace MediaPlayer
             
             frame.Navigate(new AboutFilm(films[CinemaList.SelectedIndex]));
         }
+
+        private void SettingsBT_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new settings());
+        }
     }
 }
