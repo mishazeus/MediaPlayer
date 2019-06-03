@@ -55,14 +55,16 @@ namespace MediaPlayer
 
             try
             {
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+            //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+            //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
                 {
                     SQLiteCommand cmdSelect = db.CreateCommand();
 
-                    cmdSelect.CommandText = command ;
-                    
+                    cmdSelect.CommandText = command;
+
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
 
                     while (reader.Read())
@@ -74,15 +76,20 @@ namespace MediaPlayer
                             {
                                 case 0: { filmid = reader.GetValue(colCtr).ToString(); } break;
                                 case 1: { name = reader.GetValue(colCtr).ToString(); } break;
-                                case 2: { directorid = reader.GetValue(colCtr).ToString(); } break;
+                                case 2: { directorid = reader.GetValue(colCtr).ToString();
+                                        int bufferid = Convert.ToInt32(directorid);
+                         directorid = P($"SELECT Name||' '||LastName FROM Director WHERE directorID = {bufferid};");
+                                    } break;
                                 case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
                                 case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
                                 case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
                                 case 6: { ratingid = reader.GetValue(colCtr).ToString(); } break;
-                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;    
+                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
                             }
                         }
+                        
                         film = new Film(filmid, name, directorid, studioid, duratiom, pathlogo, ratingid, pathfilm);
+
                         list.Add(film);
                     }
                 }
@@ -92,16 +99,58 @@ namespace MediaPlayer
                 }
                 db.Close();
             }
+            catch (System.Data.SQLite.SQLiteException) {
+
+            }
             finally
             {
-              //   delete(IDisposable)db;
+                //   delete(IDisposable)db;
             }
             return list;
         }
 
+        string P(string command) {
+            SQLiteConnection db = new SQLiteConnection();
+            string r = "";
+            try
+            {
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
+
+                    cmdSelect.CommandText = command;
+
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+                    while (reader.Read()) {
+                        r = reader.GetValue(0).ToString();
+                    }
+                    
+
+                    return r;
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            catch (System.Data.SQLite.SQLiteException)
+            {
+            }
+            finally
+            {
+                //   delete(IDisposable)db;
+            }
+            return "";
+        }
+
         private void CinemaList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
             frame.Navigate(new AboutFilm(films[CinemaList.SelectedIndex]));
         }
 

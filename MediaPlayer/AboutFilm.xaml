@@ -61,7 +61,7 @@
             <TextBlock x:Name="fGenre"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="11" Grid.Column="1" FontSize="21"/>
             <TextBlock x:Name="fBudget"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="12" Grid.Column="1" FontSize="21"/>
             <TextBlock x:Name="fRating"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="13" Grid.Column="1" FontSize="21"/>
-            <TextBlock x:Name="fName"   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="21" />
+            <TextBlock x:Name="fName"   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontSize="21" />
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="21" Text="Год: "/>
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="21" Text="Страна:"/>
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="21" Text="Cтудия:"/>
