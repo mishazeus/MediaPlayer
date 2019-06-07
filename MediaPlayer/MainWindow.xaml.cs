@@ -30,22 +30,32 @@ namespace MediaPlayer
     {
         List<Film> films;
 
+
         public MainWindow()
         {
             InitializeComponent();
             WindowState = WindowState.Normal;
             WindowState = WindowState.Maximized;
 
+             
+        //frame.height = system.windows.systemparameters.primaryscreenheight;
+        //frame.width = system.windows.systemparameters.primaryscreenwidth;
 
-            //frame.height = system.windows.systemparameters.primaryscreenheight;
-            //frame.width = system.windows.systemparameters.primaryscreenwidth;
 
-
-            films = new List<Film>();
+        films = new List<Film>();
 
             CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
             DataContext = this;
+            AboutFilm.onNameSend += Page1_onNameSend;
 
+        }
+
+        void Page1_onNameSend(bool tr, string Path)
+        {
+            if (tr == true) {
+                frame.Navigate(new PlayFilm(Path));
+            }
+            
         }
 
         List<Film> BD(string command, List<Film> list) {
@@ -55,8 +65,8 @@ namespace MediaPlayer
 
             try
             {
-            //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
             //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
@@ -114,8 +124,8 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
                 //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
@@ -158,5 +168,7 @@ namespace MediaPlayer
         {
             frame.Navigate(new settings());
         }
+
+      
     }
 }

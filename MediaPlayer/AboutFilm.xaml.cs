@@ -21,6 +21,10 @@ namespace MediaPlayer
     /// </summary>
     public partial class AboutFilm : Page
     {
+        string PathFilm;
+        public delegate void SendEvent(bool trig, string Path);
+        public static event SendEvent onNameSend;
+        
         public AboutFilm(Film film)
         {
             InitializeComponent();
@@ -29,15 +33,18 @@ namespace MediaPlayer
             fName.Text = film.Name;
             fDirector.Text = film.DirectorID;
             fRating.Text = film.ratingID;
-
+            PathFilm = film.PathFilm;
             //aText.Text = "";
-           
-         
+
+            //    filmPath.Replace('\\', '\');
+            //D:\фильмы\Железный человек.mkv  
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {  
+            onNameSend(true, PathFilm);
         }
+
+       
     }
 }

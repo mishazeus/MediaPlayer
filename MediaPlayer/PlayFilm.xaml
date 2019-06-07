@@ -9,9 +9,9 @@
       Title="PlayFilm">
 
     <Grid>
-        <MediaElement HorizontalAlignment="Center" Height="auto" VerticalAlignment="Center" Width="auto"/>
-        <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="75"/>
-        
+        <MediaElement x:Name="Cinema" LoadedBehavior="Play"/>
+        <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
+
 
     </Grid>
 </Page>
