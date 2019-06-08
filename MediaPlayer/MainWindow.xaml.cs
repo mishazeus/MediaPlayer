@@ -58,6 +58,7 @@ namespace MediaPlayer
         {
             if (tr == true) {
                 frame.Navigate(new PlayFilm(Path));
+                frame.Background = Brushes.Black;
             }
             
         }
@@ -169,11 +170,13 @@ namespace MediaPlayer
         private void CinemaList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             frame.Navigate(new AboutFilm(films[CinemaList.SelectedIndex]));
+            frame.Background = Brushes.White;
         }
 
         private void SettingsBT_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(new settings());
+            frame.Background = Brushes.White;
         }
 
       

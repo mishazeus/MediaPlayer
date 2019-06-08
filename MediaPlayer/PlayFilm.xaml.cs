@@ -37,16 +37,32 @@ namespace MediaPlayer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-
-                Cinema.Source = new Uri(openFileDialog.FileName);
-
-            }
-
+            Cinema.Play();
         }
-       
 
+        private void ButtonPause(object sender, RoutedEventArgs e)
+        {
+            Cinema.Pause();
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            TimeSpan ts = TimeSpan.FromSeconds(e.NewValue);
+            Cinema.Pause();
+            Cinema.Position = ts;
+            Cinema.Play();
+        }
+
+        void timer_Tick(object seender, EventArgs e) {
+            slider.Value = Cinema.Position.TotalSeconds;
+        }
+
+        private void Cinema_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            if (Cinema.NaturalDuration.HasTimeSpan) {
+                TimeSpan ts = TimeSpan.FromSeconds(Cinema.NaturalDuration.TimeSpan.TotalSeconds);
+                slider.Maximum = ts.TotalSeconds;
+            }
+        }
     }      
 }

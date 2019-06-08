@@ -9,9 +9,26 @@
       Title="PlayFilm">
 
     <Grid>
-        <MediaElement x:Name="Cinema" LoadedBehavior="Play"/>
-        <Button Content="Button" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
+        <MediaElement x:Name="Cinema" LoadedBehavior="Manual" MediaOpened="Cinema_MediaOpened"/>
+        
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Slider x:Name="slider" Grid.Column="2" Value="0" Minimum="0" Maximum="100" SelectionStart="0" 
+        IsSelectionRangeEnabled="True" ValueChanged="Slider_ValueChanged" />
+            <Button  Grid.Column="0" Content="Play"  Click="Button_Click" Height="20" VerticalAlignment="Top"/>
+            <Button  Grid.Column="1" Content="Pause"  Click="ButtonPause"/>
+        </Grid>
 
     </Grid>
 </Page>
