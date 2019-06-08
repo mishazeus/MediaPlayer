@@ -28,21 +28,25 @@ namespace MediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        string standartPath = Directory.GetCurrentDirectory().ToString();
+        string Path;
+
         List<Film> films;
 
 
         public MainWindow()
         {
+       
             InitializeComponent();
+            
             WindowState = WindowState.Normal;
             WindowState = WindowState.Maximized;
 
-             
-        //frame.height = system.windows.systemparameters.primaryscreenheight;
-        //frame.width = system.windows.systemparameters.primaryscreenwidth;
+            Path = Directory.GetParent(standartPath).ToString();
 
 
-        films = new List<Film>();
+            films = new List<Film>();
 
             CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
             DataContext = this;
@@ -65,9 +69,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
-            //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString()+"\\Resurses\\film.db" + "\"";
+         
                 db.Open();
                 try
                 {
@@ -128,7 +132,7 @@ namespace MediaPlayer
             try
             {
                 //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
                 //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
