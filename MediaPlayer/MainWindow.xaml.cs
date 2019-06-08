@@ -66,7 +66,7 @@ namespace MediaPlayer
             try
             {
                 //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
             //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
@@ -93,7 +93,10 @@ namespace MediaPlayer
                                 case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
                                 case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
                                 case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
-                                case 6: { ratingid = reader.GetValue(colCtr).ToString(); } break;
+                                case 6: { ratingid = reader.GetValue(colCtr).ToString();
+                                        int bufferid = Convert.ToInt32(ratingid);
+                                        ratingid = P($"SELECT rating FROM Rating WHERE ratingID = {bufferid};");
+                                    } break;
                                 case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
                             }
                         }
@@ -125,7 +128,7 @@ namespace MediaPlayer
             try
             {
                 //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
                 //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try

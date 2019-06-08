@@ -90,6 +90,9 @@
     <Compile Include="AddFilm.xaml.cs">
       <DependentUpon>AddFilm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BufferPage.xaml.cs">
+      <DependentUpon>BufferPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DLNADevice.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Helper.cs" />
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddFilm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BufferPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
