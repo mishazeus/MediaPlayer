@@ -27,14 +27,17 @@ namespace MediaPlayer
         string Path;
         Film film;
         Director director;
+        List<Director> directors;
         Location location;
+        List<Location> locations;
         Studio studio;
+        List<Studio> studios;
 
 
         public AddFilm()
         {
             InitializeComponent();
-
+            director = new Director(V("SELECT DirectorID FROM Director;"), V("SELECT Name FROM Director;"), V("LastName FROM Director;"), V("SELECT YearOfBorn FROM Director;"));
             Path = Directory.GetParent(standartPath).ToString();
         }
 
@@ -254,6 +257,107 @@ namespace MediaPlayer
             {
                 fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
+        }
+
+        string V(string command)
+        {
+            SQLiteConnection db = new SQLiteConnection();
+            string r = "";
+            try
+            {
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
+
+                    cmdSelect.CommandText = command;
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+
+                   return reader.GetValue(0).ToString();
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            catch (System.Data.SQLite.SQLiteException)
+            {
+            }
+            finally
+            {
+                //   delete(IDisposable)db;
+            }
+            return "";
+        }
+
+        string M(string command,List list)
+        {
+            SQLiteConnection db = new SQLiteConnection();
+            string r = "";
+            try
+            {
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
+
+                    cmdSelect.CommandText = command;
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+
+                    while (reader.Read()) {
+                        
+                        for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
+                        {
+                            switch (colCtr)
+                            {
+                                case 0: { filmid = reader.GetValue(colCtr).ToString(); } break;
+                                case 1: { name = reader.GetValue(colCtr).ToString(); } break;
+                                case 2:
+                                    {
+                                        directorid = reader.GetValue(colCtr).ToString();
+                                        int bufferid = Convert.ToInt32(directorid);
+                                        directorid = P($"SELECT Name||' '||LastName FROM Director WHERE directorID = {bufferid};");
+                                    }
+                                    break;
+                                case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
+                                case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
+                                case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
+                                case 6:
+                                    {
+                                        ratingid = reader.GetValue(colCtr).ToString();
+                                        int bufferid = Convert.ToInt32(ratingid);
+                                        ratingid = P($"SELECT rating FROM Rating WHERE ratingID = {bufferid};");
+                                    }
+                                    break;
+                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
+                            }
+
+                            list.Add(film);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            catch (System.Data.SQLite.SQLiteException)
+            {
+            }
+            finally
+            {
+                //   delete(IDisposable)db;
+            }
+            return "";
         }
     }
 }
