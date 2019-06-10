@@ -36,8 +36,7 @@ namespace MediaPlayer
             PathFilm = film.PathFilm;
             //aText.Text = "";
 
-            //    filmPath.Replace('\\', '\');
-            //D:\фильмы\Железный человек.mkv  
+        
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

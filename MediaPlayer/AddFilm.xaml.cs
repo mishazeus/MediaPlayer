@@ -14,6 +14,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace MediaPlayer
 {
@@ -24,10 +25,16 @@ namespace MediaPlayer
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
+        Film film;
+        Director director;
+        Location location;
+        Studio studio;
+
 
         public AddFilm()
         {
             InitializeComponent();
+
             Path = Directory.GetParent(standartPath).ToString();
         }
 
@@ -46,6 +53,7 @@ namespace MediaPlayer
                 && Genre.Text != "" && Budget.Text != "" && Rating.Text != "" && Name.Text != "")
             {
                 stringChange(Director.Text);
+          //      P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{hgk}', {1}, {2}, '{145 min}', '{6hi/g}', {2}, '{julu/gk}'); ");
             }
             else {
                 //r0.Fill = Brushes.Red;
@@ -90,12 +98,7 @@ namespace MediaPlayer
                     SQLiteCommand cmdSelect = db.CreateCommand();
 
                     cmdSelect.CommandText = command;
-
-                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        r = reader.GetValue(0).ToString();
-                    }
+        
 
                 }
                 catch (Exception e)
@@ -229,6 +232,28 @@ namespace MediaPlayer
                 r13.Fill = Brushes.Green;
             }
             else { r13.Fill = Brushes.Red; }
+        }
+
+        private void FPoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a picture";
+            openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            if (openFileDialog.ShowDialog() == true) {
+                fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
+                
+        }
+
+        private void FilmPath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a film";
+            openFileDialog.Filter = "MKV Files (*.mkv)|*.mkv|MP4 Files (*.mp4)|*.mp4|AVI Files (*.avi)|*.avi";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
         }
     }
 }

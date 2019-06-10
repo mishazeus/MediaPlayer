@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
 
-        <Image  x:Name="fPoster" Height="auto" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Source="Resurses/user.png"  />
+        <Image  x:Name="fPoster" Height="auto" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Source="Resurses/user.png" MouseLeftButtonDown="FPoster_MouseLeftButtonDown"  />
 
         <Grid Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Top" >
             <Grid.RowDefinitions>
@@ -83,18 +83,18 @@
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="12" Grid.Column="0" FontSize="21" Text="Бюджет:"/>
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="13" Grid.Column="0" FontSize="21" Text="Рейтинг MPAA:"/>
             <TextBox x:Name="Year" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Country" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Studio" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Director" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Screenwriter" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Producer" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Operator" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="7" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Composer" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="8" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Country" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Studio" Width="140"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Director" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Screenwriter" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Producer" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Operator" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="7" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Composer" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="8" Grid.Column="2" FontSize="21"/>
             <TextBox x:Name="Time" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="9" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Editor" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="10" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Genre" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="11" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Budget" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="12" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Rating" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="13" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Editor" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="10" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Genre" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="11" Grid.Column="2" FontSize="21"/>
+            <TextBox x:Name="Budget" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="12" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Rating" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="13" Grid.Column="2" FontSize="21"/>
             <TextBox x:Name="Name" Width="140"  HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="21" />
             <Rectangle x:Name="r0" Grid.Column="3" Width="20" Grid.Row="0"  />
             <Rectangle x:Name="r1" Grid.Column="3" Grid.Row="1"  />
@@ -114,7 +114,8 @@
         <Button Content="Сохранить фильм" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
         <ListBox Grid.Column="5"  />
         <Button Content="Добавить актера" Grid.Column="5"  Grid.Row="1"/>
-        
+        <Button x:Name="filmPath" Content="Выбрать фильм" Grid.Column="3"  Grid.Row="1" Click="FilmPath_Click" />
+
 
     </Grid>
 </Page>

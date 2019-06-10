@@ -87,15 +87,18 @@
     <Compile Include="AboutFilm.xaml.cs">
       <DependentUpon>AboutFilm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Actor.cs" />
     <Compile Include="AddFilm.xaml.cs">
       <DependentUpon>AddFilm.xaml</DependentUpon>
     </Compile>
     <Compile Include="BufferPage.xaml.cs">
       <DependentUpon>BufferPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Director.cs" />
     <Compile Include="DLNADevice.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="PlayFilm.xaml.cs">
       <DependentUpon>PlayFilm.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,7 @@
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="SSDP.cs" />
+    <Compile Include="Studio.cs" />
     <Page Include="AboutFilm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
