@@ -28,7 +28,7 @@
 
         <Image  x:Name="fPoster" Height="auto" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Source="Resurses/user.png" MouseLeftButtonDown="FPoster_MouseLeftButtonDown"  />
 
-        <Grid Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Top" >
+        <Grid Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -47,74 +47,204 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
        
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="fYear" Content="Добавить" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="21" Click="FYear_Click"/>
-            <Button x:Name="fCountry" Content="Добавить"  HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="21" Click="FCountry_Click"/>
-            <Button x:Name="fStudio" Content="Добавить"  HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="21" Click="FStudio_Click"/>
-            <Button x:Name="fDirector" Content="Добавить"  HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="21" Click="FDirector_Click"/>
-            <Button x:Name="fScreenwriter" Content="Добавить"  HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" FontSize="21" Height="27" VerticalAlignment="Top" Click="FScreenwriter_Click"/>
-            <Button x:Name="fProducer"  Content="Добавить" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="6" Grid.Column="1" FontSize="21" Click="FProducer_Click"/>
-            <Button x:Name="fOperator" Content="Добавить"  HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="7" Grid.Column="1" FontSize="21" Click="FOperator_Click"/>
-            <Button x:Name="fComposer" Content="Добавить"  HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="8" Grid.Column="1" FontSize="21" Click="FComposer_Click"/>
-            <Button x:Name="fTime"  Content="Добавить" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1" FontSize="21" Height="27" VerticalAlignment="Bottom" Click="FTime_Click"/>
-            <Button x:Name="fEditor" Content="Добавить"  HorizontalAlignment="Center" Grid.Row="10" Grid.Column="1" FontSize="21" Height="27" VerticalAlignment="Top" Click="FEditor_Click"/>
-            <Button x:Name="fGenre"  Content="Добавить" HorizontalAlignment="Right"  VerticalAlignment="Top" Grid.Row="11" Grid.Column="1" FontSize="21" Click="FGenre_Click"/>
-            <Button x:Name="fBudget"  Content="Добавить" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" FontSize="21" Click="FBudget_Click"/>
-            <Button x:Name="fRating" Content="Добавить"  HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="13" Grid.Column="1" FontSize="21" Click="FRating_Click"/>
-            <Button x:Name="fName" Content="Добавить"   HorizontalAlignment="Center"  VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" FontSize="21" Click="FName_Click" />
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="21" Text="Название: "/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="21" Text="Год: "/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="21" Text="Страна:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="21" Text="Cтудия:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="21" Text="Режиссер:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" FontSize="21" Text="Сценарий:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" FontSize="21" Text="Продюсер:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" FontSize="21" Text="Оператор:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" FontSize="21" Text="Композитор:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" FontSize="21" Text="Время:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" FontSize="21" Text="Монтаж:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="11" Grid.Column="0" FontSize="21" Text="Жанр:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="12" Grid.Column="0" FontSize="21" Text="Бюджет:"/>
-            <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="13" Grid.Column="0" FontSize="21" Text="Рейтинг MPAA:"/>
-            <TextBox x:Name="Year" Width="140" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Country" Width="140" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Studio" Width="140"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Director" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Screenwriter" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Producer" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Operator" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="7" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Composer" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="8" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Time" Width="140"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="9" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Editor" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="10" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Genre" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="11" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Budget" Width="140" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="12" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Rating" Width="140"  HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="13" Grid.Column="2" FontSize="21"/>
-            <TextBox x:Name="Name" Width="140"  HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="21" />
-            <Rectangle x:Name="r0" Grid.Column="3" Width="20" Grid.Row="0"  />
-            <Rectangle x:Name="r1" Grid.Column="3" Grid.Row="1"  />
-            <Rectangle x:Name="r2" Grid.Column="3" Grid.Row="2"  />
-            <Rectangle x:Name="r3" Grid.Column="3" Grid.Row="3"  />
-            <Rectangle x:Name="r4" Grid.Column="3" Grid.Row="4"  />
-            <Rectangle x:Name="r5" Grid.Column="3" Grid.Row="5"  />
-            <Rectangle x:Name="r6" Grid.Column="3" Grid.Row="6"  />
-            <Rectangle x:Name="r7" Grid.Column="3" Grid.Row="7"  />
-            <Rectangle x:Name="r8" Grid.Column="3" Grid.Row="8"  />
-            <Rectangle x:Name="r9" Grid.Column="3" Grid.Row="9"  />
-            <Rectangle x:Name="r10" Grid.Column="3" Grid.Row="10"  />
-            <Rectangle x:Name="r11" Grid.Column="3" Grid.Row="11"  />
-            <Rectangle x:Name="r12" Grid.Column="3" Grid.Row="12"  />
-            <Rectangle x:Name="r13" Grid.Column="3" Grid.Row="13" Height="30" VerticalAlignment="Top" />
+            <Button x:Name="fYear" Content="Добавить"  Grid.Row="1" Grid.Column="1" FontSize="21" Click="FYear_Click"/>
+            <Button x:Name="fCountry" Content="Добавить"   Grid.Row="2" Grid.Column="1" FontSize="21" Click="FCountry_Click"/>
+            <Button x:Name="fStudio" Content="Добавить"   Grid.Row="3" Grid.Column="1" FontSize="21" Click="FStudio_Click"/>
+            <Button x:Name="fDirector" Content="Добавить"   Grid.Row="4" Grid.Column="1" FontSize="21" Click="FDirector_Click"/>
+            <Button x:Name="fScreenwriter" Content="Добавить"   Grid.Row="5" Grid.Column="1" FontSize="21"  Click="FScreenwriter_Click"/>
+            <Button x:Name="fProducer"  Content="Добавить" Grid.Row="6" Grid.Column="1" FontSize="21" Click="FProducer_Click"/>
+            <Button x:Name="fOperator" Content="Добавить" Grid.Row="7" Grid.Column="1" FontSize="21" Click="FOperator_Click"/>
+            <Button x:Name="fComposer" Content="Добавить"  Grid.Row="8" Grid.Column="1" FontSize="21" Click="FComposer_Click"/>
+            <Button x:Name="fTime"  Content="Добавить" Grid.Row="9" Grid.Column="1" FontSize="21"  Click="FTime_Click"/>
+            <Button x:Name="fEditor" Content="Добавить"  Grid.Row="10" Grid.Column="1" FontSize="21"  Click="FEditor_Click"/>
+            <Button x:Name="fGenre"  Content="Добавить"  Grid.Row="11" Grid.Column="1" FontSize="21" Click="FGenre_Click"/>
+            <Button x:Name="fBudget"  Content="Добавить"  Grid.Row="12" Grid.Column="1" FontSize="21" Click="FBudget_Click"/>
+            <Button x:Name="fRating" Content="Добавить"  Grid.Row="13" Grid.Column="1" FontSize="21" Click="FRating_Click"/>
+            <Button x:Name="fName" Content="Добавить"  Grid.Row="0" Grid.Column="1" FontSize="21" Click="FName_Click" />
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="0" Grid.Column="0" FontSize="21" Text="Название: "/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="1" Grid.Column="0" FontSize="21" Text="Год: "/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="2" Grid.Column="0" FontSize="21" Text="Страна:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="3" Grid.Column="0" FontSize="21" Text="Cтудия:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="4" Grid.Column="0" FontSize="21" Text="Режиссер:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="5" Grid.Column="0" FontSize="21" Text="Сценарий:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="6" Grid.Column="0" FontSize="21" Text="Продюсер:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="7" Grid.Column="0" FontSize="21" Text="Оператор:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="8" Grid.Column="0" FontSize="21" Text="Композитор:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="9" Grid.Column="0" FontSize="21" Text="Время:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="10" Grid.Column="0" FontSize="21" Text="Монтаж:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="11" Grid.Column="0" FontSize="21" Text="Жанр:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="12" Grid.Column="0" FontSize="21" Text="Бюджет:"/>
+            <TextBlock   TextWrapping="Wrap"  Grid.Row="13" Grid.Column="0" FontSize="21" Text="Рейтинг MPAA:"/>
+            <TextBox x:Name="Year"   TextWrapping="Wrap"  Grid.Row="1" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Country" Grid.Row="2" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Country}"/>
+                        </Grid>
+                    </DataTemplate>
+
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Studio"  Grid.Row="3" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Director"  Grid.Row="4" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Screenwriter"  Grid.Row="5" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Producer" Grid.Row="6" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Operator" Grid.Row="7" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="Composer"  Grid.Row="8" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox x:Name="Time"  TextWrapping="Wrap"  Grid.Row="9" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Editor"  Grid.Row="10" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2" FontWeight="Normal" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>  
+            </ComboBox>
+            <ComboBox x:Name="Genre"  Grid.Row="11" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Genre}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox x:Name="Budget"  Grid.Row="12" Grid.Column="2" FontSize="21"/>
+            <ComboBox x:Name="Rating" Grid.Row="13" Grid.Column="2" FontSize="21">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding rating}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox x:Name="Name"  TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" FontSize="21"/>
+            <Rectangle x:Name="r0" Grid.Column="3" Width="20" Grid.Row="0"/>
+            <Rectangle x:Name="r1" Grid.Column="3" Grid.Row="1"/>
+            <Rectangle x:Name="r2" Grid.Column="3" Grid.Row="2"/>
+            <Rectangle x:Name="r3" Grid.Column="3" Grid.Row="3"/>
+            <Rectangle x:Name="r4" Grid.Column="3" Grid.Row="4"/>
+            <Rectangle x:Name="r5" Grid.Column="3" Grid.Row="5"/>
+            <Rectangle x:Name="r6" Grid.Column="3" Grid.Row="6"/>
+            <Rectangle x:Name="r7" Grid.Column="3" Grid.Row="7"/>
+            <Rectangle x:Name="r8" Grid.Column="3" Grid.Row="8"/>
+            <Rectangle x:Name="r9" Grid.Column="3" Grid.Row="9"/>
+            <Rectangle x:Name="r10" Grid.Column="3" Grid.Row="10"/>
+            <Rectangle x:Name="r11" Grid.Column="3" Grid.Row="11"/>
+            <Rectangle x:Name="r12" Grid.Column="3" Grid.Row="12"/>
+            <Rectangle x:Name="r13" Grid.Column="3" Grid.Row="13" Height="30" VerticalAlignment="Top"/>
         </Grid>
         <Button Content="Сохранить фильм" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
         <ListBox Grid.Column="5"  />
         <Button Content="Добавить актера" Grid.Column="5"  Grid.Row="1"/>
-        <Button x:Name="filmPath" Content="Выбрать фильм" Grid.Column="3"  Grid.Row="1" Click="FilmPath_Click" />
+        <Button x:Name="filmPath" Content="Выбрать фильм" Grid.Column="3"  Grid.Row="1" Click="FilmPath_Click"/>
 
 
     </Grid>

@@ -66,7 +66,7 @@ namespace MediaPlayer
         List<Film> BD(string command, List<Film> list) {
             SQLiteConnection db = new SQLiteConnection();
 
-            string filmid=""; string name=""; string directorid=""; string studioid=""; string duratiom=""; string pathlogo=""; string ratingid=""; string pathfilm="";
+            string filmid=""; string name=""; string directorid=""; string studioid=""; string duratiom=""; string pathlogo=""; string ratingid=""; string pathfilm=""; string year = ""; string budget = "";
 
             try
             {
@@ -77,9 +77,7 @@ namespace MediaPlayer
                 try
                 {
                     SQLiteCommand cmdSelect = db.CreateCommand();
-
                     cmdSelect.CommandText = command;
-
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
 
                     while (reader.Read())
@@ -103,10 +101,12 @@ namespace MediaPlayer
                                         ratingid = P($"SELECT rating FROM Rating WHERE ratingID = {bufferid};");
                                     } break;
                                 case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
+                                case 8: { year = reader.GetValue(colCtr).ToString(); } break;
+                                case 9: { budget = reader.GetValue(colCtr).ToString(); } break;
                             }
                         }
                         
-                        film = new Film(filmid, name, directorid, studioid, duratiom, pathlogo, ratingid, pathfilm);
+                        film = new Film(filmid, name, directorid, studioid, duratiom, pathlogo, ratingid, pathfilm, year, budget);
 
                         list.Add(film);
                     }

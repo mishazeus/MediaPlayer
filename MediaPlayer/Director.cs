@@ -22,6 +22,15 @@ namespace MediaPlayer
             YearOfBorn = yearofborn;
            
         }
+
+        public Director()
+        {
+            DirectorID = "";
+            Name = "";
+            LastName = "";
+            YearOfBorn = "";
+
+        }
     }
 
 }

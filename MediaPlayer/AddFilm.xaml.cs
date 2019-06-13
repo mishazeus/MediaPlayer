@@ -25,6 +25,7 @@ namespace MediaPlayer
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
+
         Film film;
         Director director;
         List<Director> directors;
@@ -37,8 +38,14 @@ namespace MediaPlayer
         public AddFilm()
         {
             InitializeComponent();
-            director = new Director(V("SELECT DirectorID FROM Director;"), V("SELECT Name FROM Director;"), V("LastName FROM Director;"), V("SELECT YearOfBorn FROM Director;"));
             Path = Directory.GetParent(standartPath).ToString();
+            directors = new List<Director>();
+            M("SELECT * FROM Director;",1,directors); 
+           
+           Director.ItemsSource = directors;
+           DataContext = this;
+
+
         }
 
         string[] stringChange(string split) {    
@@ -255,11 +262,12 @@ namespace MediaPlayer
             openFileDialog.Filter = "MKV Files (*.mkv)|*.mkv|MP4 Files (*.mp4)|*.mp4|AVI Files (*.avi)|*.avi";
             if (openFileDialog.ShowDialog() == true)
             {
-                fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //insert filmpath
+                filmPath.Background = Brushes.Green;
             }
         }
 
-        string V(string command)
+        string V(string command) // для одиночных записей
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
@@ -295,7 +303,7 @@ namespace MediaPlayer
             return "";
         }
 
-        string M(string command,List list)
+        void M(string command, int sw, List<Director> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
@@ -312,37 +320,35 @@ namespace MediaPlayer
                     cmdSelect.CommandText = command;
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
 
-                    while (reader.Read()) {
-                        
-                        for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
-                        {
-                            switch (colCtr)
-                            {
-                                case 0: { filmid = reader.GetValue(colCtr).ToString(); } break;
-                                case 1: { name = reader.GetValue(colCtr).ToString(); } break;
-                                case 2:
-                                    {
-                                        directorid = reader.GetValue(colCtr).ToString();
-                                        int bufferid = Convert.ToInt32(directorid);
-                                        directorid = P($"SELECT Name||' '||LastName FROM Director WHERE directorID = {bufferid};");
-                                    }
-                                    break;
-                                case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
-                                case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
-                                case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
-                                case 6:
-                                    {
-                                        ratingid = reader.GetValue(colCtr).ToString();
-                                        int bufferid = Convert.ToInt32(ratingid);
-                                        ratingid = P($"SELECT rating FROM Rating WHERE ratingID = {bufferid};");
-                                    }
-                                    break;
-                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
-                            }
 
-                            list.Add(film);
-                        }
-                    }
+                    switch (sw)
+                    {
+                        case 1: // директор
+                            {
+
+                                while (reader.Read())
+                                {
+                                  Director director = new Director();
+                                    for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
+                                    {
+                                        switch (colCtr)
+                                        {
+                                            case 0: {director.DirectorID = reader.GetValue(colCtr).ToString(); } break;
+                                            case 1: { director.Name = reader.GetValue(colCtr).ToString(); } break;
+                                            case 2: { director.LastName = reader.GetValue(colCtr).ToString(); } break;
+                                            case 3: { director.YearOfBorn = reader.GetValue(colCtr).ToString(); } break;
+                                           
+                                        }
+                                    }
+                                    list.Add(director);
+                                }
+
+
+                            }break;
+
+
+                            }
+                    
                 }
                 catch (Exception e)
                 {
@@ -357,7 +363,7 @@ namespace MediaPlayer
             {
                 //   delete(IDisposable)db;
             }
-            return "";
+          
         }
     }
 }
