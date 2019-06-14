@@ -45,13 +45,11 @@ namespace MediaPlayer
 
             Path = Directory.GetParent(standartPath).ToString();
 
-
             films = new List<Film>();
 
             CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
             DataContext = this;
             AboutFilm.onNameSend += Page1_onNameSend;
-
         }
 
         void Page1_onNameSend(bool tr, string Path)

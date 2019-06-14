@@ -18,5 +18,12 @@ namespace MediaPlayer
             Country = country;  
 
         }
+
+        public Location()
+        {
+            CountryID = "";
+            Country = "";
+
+        }
     }
 }

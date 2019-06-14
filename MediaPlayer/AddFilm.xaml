@@ -207,7 +207,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Genre}"/>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Genres}"/>
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
@@ -220,13 +220,13 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding rating}"/>
+                            <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Ratings}"/>
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox x:Name="Name"  TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" FontSize="21"/>
-            <Rectangle x:Name="r0" Grid.Column="3" Width="20" Grid.Row="0"/>
+            <Rectangle x:Name="r0" Grid.Column="3" Grid.Row="0"/>
             <Rectangle x:Name="r1" Grid.Column="3" Grid.Row="1"/>
             <Rectangle x:Name="r2" Grid.Column="3" Grid.Row="2"/>
             <Rectangle x:Name="r3" Grid.Column="3" Grid.Row="3"/>
@@ -242,8 +242,22 @@
             <Rectangle x:Name="r13" Grid.Column="3" Grid.Row="13" Height="30" VerticalAlignment="Top"/>
         </Grid>
         <Button Content="Сохранить фильм" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
-        <ListBox Grid.Column="5"  />
-        <Button Content="Добавить актера" Grid.Column="5"  Grid.Row="1"/>
+        <ListBox x:Name="Actor" Grid.Column="5" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  FontSize="21" Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="2"  FontSize="21" Text="{Binding LastName}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Content="Добавить актера" Grid.Column="5"  Grid.Row="1" Click="Button_Click_1"/>
         <Button x:Name="filmPath" Content="Выбрать фильм" Grid.Column="3"  Grid.Row="1" Click="FilmPath_Click"/>
 
 

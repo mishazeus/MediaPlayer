@@ -6,28 +6,29 @@ using System.Threading.Tasks;
 
 namespace MediaPlayer
 {
-   public class Actor
+    class Composer
     {
-        public string ActorID { get; set; }
+        public string ComposerID { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string YearOfBorn { get; set; }
+        public string FilmID { get; set; }
 
-        public Actor(string actorid, string name, string lastname, string yearofborn)
+
+        public Composer(string composerid, string name, string lastname, string filmid)
         {
-            ActorID = actorid;
+            ComposerID = composerid;
             Name = name;
             LastName = lastname;
-            YearOfBorn = yearofborn;
+            FilmID = filmid;
 
         }
 
-        public Actor()
+        public Composer()
         {
-            ActorID = "";
+            ComposerID = "";
             Name = "";
             LastName = "";
-            YearOfBorn = "";
+            FilmID = "";
         }
     }
 }

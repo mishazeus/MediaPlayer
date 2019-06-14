@@ -17,9 +17,16 @@ namespace MediaPlayer
         {
             StudioID = studioid;
             Name = name;
-            CountryID = location.CountryID;
-            StudioID = studioid;
+            CountryID = location.CountryID; 
             
+        }
+
+        public Studio()
+        {
+            StudioID = "";
+            Name = "";
+            CountryID = "";
+
         }
     }
 }
