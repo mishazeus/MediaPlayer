@@ -242,24 +242,53 @@
             <Rectangle x:Name="r13" Grid.Column="3" Grid.Row="13" Height="30" VerticalAlignment="Top"/>
         </Grid>
         <Button Content="Сохранить фильм" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
-        <ListBox x:Name="Actor" Grid.Column="5" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"  FontSize="21" Text="{Binding Name}"/>
-                        <TextBlock Grid.Column="2"  FontSize="21" Text="{Binding LastName}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        
         <Button Content="Добавить актера" Grid.Column="5"  Grid.Row="1" Click="Button_Click_1"/>
         <Button x:Name="filmPath" Content="Выбрать фильм" Grid.Column="3"  Grid.Row="1" Click="FilmPath_Click"/>
+        <Grid Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
+            <ListBox x:Name="Actor" Grid.Row="1" SelectionChanged="Actor_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  FontSize="21" Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2"  FontSize="21" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
+            <ListBox x:Name="ActorList" Grid.Row="3" SourceUpdated="ActorList_SourceUpdated" SelectionChanged="ActorList_SelectionChanged" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="1*"/>
+                                
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  FontSize="21" Text="{Binding Name}"/>
+                            <TextBlock Grid.Column="2"  FontSize="21" Text="{Binding LastName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock  Grid.Row="2" TextWrapping="Wrap" Text="Добавленные актеры" />
+            <TextBlock  Grid.Row="0" TextWrapping="Wrap" Text="Список актеров" />
+
+        </Grid>
     </Grid>
 </Page>

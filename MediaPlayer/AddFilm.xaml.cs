@@ -48,6 +48,7 @@ namespace MediaPlayer
         List<Genre> genres;
         Actor actor;
         List<Actor> actors;
+        List<Actor> actors2;
 
         public AddFilm()
         {
@@ -64,6 +65,7 @@ namespace MediaPlayer
             composers = new List<Composer>();
             genres = new List<Genre>();
             actors = new List<Actor>();
+            actors2 = new List<Actor>();
             
             getDirector("SELECT * FROM Director;", directors); 
             getScreenwriter("SELECT * FROM Screenwriter;", screenwriters);
@@ -87,9 +89,10 @@ namespace MediaPlayer
            Editor.ItemsSource = editors;
            Composer.ItemsSource = composers;
            Genre.ItemsSource = genres;
-           //Actor.ItemsSource = actors;
+           Actor.ItemsSource = actors;
+           ActorList.ItemsSource = actors2;
 
-            DataContext = this;
+           DataContext = this;
 
         }
 
@@ -882,9 +885,29 @@ namespace MediaPlayer
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            ActorSelect actorSelect = new ActorSelect(actors);
-            actorSelect.Show();
+            //ActorSelect actorSelect = new ActorSelect(actors);
+            //actorSelect.Show();
+        }
+
+        private void Actor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            actors2.Add(actors[Actor.SelectedIndex]);
+            ActorList.Items.Refresh();
+
+        }
+
+        private void ActorList_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            actors.Remove(actors[Actor.SelectedIndex]);
+            Actor.Items.Refresh();
+        }
+
+        private void ActorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            actors2.RemoveAt(ActorList.SelectedIndex);
+            ActorList.ItemsSource = actors2;
+            DataContext = this;
+            ActorList.Items.Refresh();
         }
     }
 }

@@ -19,6 +19,10 @@ namespace MediaPlayer
     /// </summary>
     public partial class ActorSelect : Window
     {
+        AddFilm addFilm = new AddFilm();
+        public delegate void SendEv (bool trig, string Path);
+        public static event SendEv onNameSend;
+
         public ActorSelect(List<Actor> actors)
         {
             InitializeComponent();            
@@ -28,7 +32,7 @@ namespace MediaPlayer
 
         private void ListActor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           // actors[ListActor.SelectedIndex];
+            
             this.Close();
         }
     }
