@@ -83,7 +83,7 @@
             <TextBlock   TextWrapping="Wrap"  Grid.Row="12" Grid.Column="0" FontSize="21" Text="Бюджет:"/>
             <TextBlock   TextWrapping="Wrap"  Grid.Row="13" Grid.Column="0" FontSize="21" Text="Рейтинг MPAA:"/>
             <TextBox x:Name="Year"   TextWrapping="Wrap"  Grid.Row="1" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Country" Grid.Row="2" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Country" Grid.Row="2" Grid.Column="2" FontSize="21" SelectionChanged="Country_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -96,7 +96,7 @@
 
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Studio"  Grid.Row="3" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Studio"  Grid.Row="3" Grid.Column="2" FontSize="21" SelectionChanged="Studio_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -108,7 +108,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Director"  Grid.Row="4" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Director"  Grid.Row="4" Grid.Column="2" FontSize="21" SelectionChanged="Director_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -124,7 +124,7 @@
 
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Screenwriter"  Grid.Row="5" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Screenwriter"  Grid.Row="5" Grid.Column="2" FontSize="21" SelectionChanged="Screenwriter_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -139,7 +139,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Producer" Grid.Row="6" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Producer" Grid.Row="6" Grid.Column="2" FontSize="21" SelectionChanged="Producer_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -154,7 +154,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Operator" Grid.Row="7" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Operator" Grid.Row="7" Grid.Column="2" FontSize="21" SelectionChanged="Operator_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -169,7 +169,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="Composer"  Grid.Row="8" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Composer"  Grid.Row="8" Grid.Column="2" FontSize="21" SelectionChanged="Composer_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -185,7 +185,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox x:Name="Time"  TextWrapping="Wrap"  Grid.Row="9" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Editor"  Grid.Row="10" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Editor"  Grid.Row="10" Grid.Column="2" FontSize="21" SelectionChanged="Editor_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -200,7 +200,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>  
             </ComboBox>
-            <ComboBox x:Name="Genre"  Grid.Row="11" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Genre"  Grid.Row="11" Grid.Column="2" FontSize="21" SelectionChanged="Genre_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -213,7 +213,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox x:Name="Budget"  Grid.Row="12" Grid.Column="2" FontSize="21"/>
-            <ComboBox x:Name="Rating" Grid.Row="13" Grid.Column="2" FontSize="21">
+            <ComboBox x:Name="Rating" Grid.Row="13" Grid.Column="2" FontSize="21" SelectionChanged="Rating_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -269,7 +269,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <ListBox x:Name="ActorList" Grid.Row="3" SourceUpdated="ActorList_SourceUpdated" SelectionChanged="ActorList_SelectionChanged" >
+            <ListBox x:Name="ActorList" Grid.Row="3" SelectionChanged="ActorList_SelectionChanged" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -277,17 +277,19 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="1*"/>
-                                
+                                <ColumnDefinition Width="30"/>
+
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"  FontSize="21" Text="{Binding Name}"/>
                             <TextBlock Grid.Column="2"  FontSize="21" Text="{Binding LastName}"/>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBlock  Grid.Row="2" TextWrapping="Wrap" Text="Добавленные актеры" />
-            <TextBlock  Grid.Row="0" TextWrapping="Wrap" Text="Список актеров" />
+            <TextBlock  Grid.Row="2" TextWrapping="Wrap" FontSize="21" Text="Добавленные актеры" />
+            <TextBlock  Grid.Row="0" TextWrapping="Wrap" FontSize="21" Text="Список актеров" />
 
         </Grid>
     </Grid>

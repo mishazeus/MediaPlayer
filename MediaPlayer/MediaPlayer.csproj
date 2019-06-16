@@ -195,6 +195,12 @@
   <ItemGroup>
     <Resource Include="Resurses\user.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resurses\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resurses\success.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

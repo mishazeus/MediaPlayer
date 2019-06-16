@@ -33,5 +33,20 @@ namespace MediaPlayer
             
         }
 
+        public Film()
+        {
+            FilmID = "";
+            Name = "";
+            DirectorID = "";
+            StudioID = "";
+            Duratiom = "";
+            PathLogo = "";
+            ratingID = "";
+            PathFilm = "";
+            Year = "";
+            Budget = "";
+
+        }
+
     }
 }

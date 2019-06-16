@@ -25,6 +25,7 @@ namespace MediaPlayer
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
+        public delegate bool Predicate<in Actor>(Actor obj);
 
         Film film;
         Operator operat;
@@ -48,7 +49,8 @@ namespace MediaPlayer
         List<Genre> genres;
         Actor actor;
         List<Actor> actors;
-        List<Actor> actors2;
+        List<Actor> actors3;
+        HashSet<Actor> actors2;
 
         public AddFilm()
         {
@@ -65,7 +67,9 @@ namespace MediaPlayer
             composers = new List<Composer>();
             genres = new List<Genre>();
             actors = new List<Actor>();
-            actors2 = new List<Actor>();
+            actors3 = new List<Actor>();
+            actors2 = new HashSet<Actor>();
+            
             
             getDirector("SELECT * FROM Director;", directors); 
             getScreenwriter("SELECT * FROM Screenwriter;", screenwriters);
@@ -99,12 +103,12 @@ namespace MediaPlayer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Year.Text != "" && Country.Text != "" && Studio.Text != "" && Director.Text != "" && Screenwriter.Text != ""
-                && Producer.Text != "" && Operator.Text != "" && Composer.Text != "" && Time.Text != "" && Editor.Text != ""
-                && Genre.Text != "" && Budget.Text != "" && Rating.Text != "" && Name.Text != "")
+            if (Year.Text != "" && Country.SelectedItem != null && Studio.SelectedItem != null && Director.SelectedItem != null && Screenwriter.SelectedItem != null
+                && Producer.SelectedItem != null && Operator.SelectedItem != null && Composer.SelectedItem != null && Time.Text != "" && Editor.SelectedItem != null
+                && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
-                
-          //      P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{hgk}', {1}, {2}, '{145 min}', '{6hi/g}', {2}, '{julu/gk}'); ");
+                MessageBox.Show("sdgdg");
+                //P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{}', {}, {}, '{}', '{}', {}, '{}'); ");
             }
             else {
                 //r0.Fill = Brushes.Red;
@@ -179,65 +183,37 @@ namespace MediaPlayer
 
         private void FCountry_Click(object sender, RoutedEventArgs e)
         {
-            if (Country.Text != "")
-            {
-                r2.Fill = Brushes.Green;
-            }
-            else { r2.Fill = Brushes.Red; }
+         
         }
 
         private void FStudio_Click(object sender, RoutedEventArgs e)
         {
-            if (Studio.Text != "")
-            {
-                r3.Fill = Brushes.Green;
-            }
-            else { r3.Fill = Brushes.Red; }
+       
         }
 
         private void FDirector_Click(object sender, RoutedEventArgs e)
         {
-            if (Director.Text != "")
-            {
-                r4.Fill = Brushes.Green;
-            }
-            else { r4.Fill = Brushes.Red; }
+         
         }
 
         private void FScreenwriter_Click(object sender, RoutedEventArgs e)
         {
-            if (Screenwriter.Text != "")
-            {
-                r5.Fill = Brushes.Green;
-            }
-            else { r5.Fill = Brushes.Red; }
+         
         }
 
         private void FProducer_Click(object sender, RoutedEventArgs e)
         {
-            if (Producer.Text != "")
-            {
-                r6.Fill = Brushes.Green;
-            }
-            else { r6.Fill = Brushes.Red; }
+          
         }
 
         private void FOperator_Click(object sender, RoutedEventArgs e)
         {
-            if (Operator.Text != "")
-            {
-                r7.Fill = Brushes.Green;
-            }
-            else { r7.Fill = Brushes.Red; }
+         
         }
 
         private void FComposer_Click(object sender, RoutedEventArgs e)
         {
-            if (Composer.Text != "")
-            {
-                r8.Fill = Brushes.Green;
-            }
-            else { r8.Fill = Brushes.Red; }
+         
         }
 
         private void FTime_Click(object sender, RoutedEventArgs e)
@@ -251,20 +227,12 @@ namespace MediaPlayer
 
         private void FEditor_Click(object sender, RoutedEventArgs e)
         {
-            if (Editor.Text != "")
-            {
-                r10.Fill = Brushes.Green;
-            }
-            else { r10.Fill = Brushes.Red; }
+           
         }
 
         private void FGenre_Click(object sender, RoutedEventArgs e)
         {
-            if (Genre.Text != "")
-            {
-                r11.Fill = Brushes.Green;
-            }
-            else { r11.Fill = Brushes.Red; }
+           
         }
 
         private void FBudget_Click(object sender, RoutedEventArgs e)
@@ -278,11 +246,7 @@ namespace MediaPlayer
 
         private void FRating_Click(object sender, RoutedEventArgs e)
         {
-            if (Rating.Text != "")
-            {
-                r13.Fill = Brushes.Green;
-            }
-            else { r13.Fill = Brushes.Red; }
+           
         }
 
         private void FPoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -292,6 +256,7 @@ namespace MediaPlayer
             openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
             if (openFileDialog.ShowDialog() == true) {
                 fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                film.PathLogo = openFileDialog.FileName;
             }
                 
         }
@@ -305,6 +270,7 @@ namespace MediaPlayer
             {
                 //insert filmpath
                 filmPath.Background = Brushes.Green;
+                film.PathFilm = openFileDialog.FileName;
             }
         }
 
@@ -889,25 +855,79 @@ namespace MediaPlayer
             //actorSelect.Show();
         }
 
+
         private void Actor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             actors2.Add(actors[Actor.SelectedIndex]);
             ActorList.Items.Refresh();
 
         }
-
-        private void ActorList_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            actors.Remove(actors[Actor.SelectedIndex]);
-            Actor.Items.Refresh();
-        }
+ 
 
         private void ActorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            actors2.RemoveAt(ActorList.SelectedIndex);
-            ActorList.ItemsSource = actors2;
-            DataContext = this;
-            ActorList.Items.Refresh();
+            //int index = ActorList.SelectedIndex;
+            //var obj = ActorList.Items[index];
+
+            //actors2.Remove();
+            //ActorList.Items.Refresh();
+
+            //var dependencyObject = (DependencyObject)sender;
+            //var item = (ListBoxItem)ActorList.ContainerFromElement(dependencyObject);
+            //ActorList.Items.Remove(item);
+
+        }
+
+       
+
+        private void Country_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r2.Fill = Brushes.Green;
+        }
+
+        private void Studio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r3.Fill = Brushes.Green;
+        }
+
+        private void Director_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r4.Fill = Brushes.Green;
+        }
+
+        private void Screenwriter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r5.Fill = Brushes.Green;
+        }
+
+        private void Producer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r6.Fill = Brushes.Green;
+        }
+
+        private void Operator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r7.Fill = Brushes.Green;
+        }
+
+        private void Composer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r8.Fill = Brushes.Green;
+        }
+
+        private void Editor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r10.Fill = Brushes.Green;
+        }
+
+        private void Genre_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r11.Fill = Brushes.Green;
+        }
+
+        private void Rating_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                r13.Fill = Brushes.Green;
         }
     }
 }

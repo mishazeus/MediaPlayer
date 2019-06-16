@@ -177,6 +177,42 @@ namespace MediaPlayer
             frame.Background = Brushes.White;
         }
 
-      
+        private void SearchBT_Click(object sender, RoutedEventArgs e)
+        {
+            string SearchRequest = SearchTB.Text;
+            if (SearchRequest != "")
+            {
+                List<Film> findFilms = new List<Film>();
+
+                foreach (Film film in films)
+                {
+                    if (GoodRequest(film, SearchRequest) != -1)
+                    {
+                        findFilms.Add(film);
+                    }
+                }
+
+                CinemaList.ItemsSource = findFilms;
+                DataContext = this;
+            }
+        }
+
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        int GoodRequest(Film film, string request) {
+            if (film.Name.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.DirectorID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.Duratiom.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.Year.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.StudioID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.ratingID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.Budget.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+
+            return -1;
+        }
+
     }
 }

@@ -15,8 +15,8 @@ Title="MainWindow" Height="450" Width="800">
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBox Template="{StaticResource TextBoxSearch}" x:Name="SearchTB" Width="300" Height="20"  />
-            <Button x:Name="SearchBT" Content="Поиск" Margin="5 0" Width="50"/>
+            <TextBox Template="{StaticResource TextBoxSearch}" x:Name="SearchTB" Width="300" Height="20" TextChanged="SearchTB_TextChanged"  />
+            <Button x:Name="SearchBT" Content="Поиск" Margin="5 0" Width="50" Click="SearchBT_Click"/>
         </StackPanel>
 
         <Button x:Name="SettingsBT" Content="Настройки" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Margin="0 0 10 0" Click="SettingsBT_Click"/>
