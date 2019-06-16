@@ -34,16 +34,21 @@ namespace MediaPlayer
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             DataContext = film;
-
+            fCountry.Text = V($"SELECT Country FROM Location WHERE countryID = {V($"SELECT countryID FROM Studio  WHERE studioID = {film.StudioID};")};");
             fYear.Text = film.Year;
-         //   fCountry.Text = V($"SELECT Country FROM Location WHERE {film.StudioID};");
+            fScreenwriter.Text = V($"SELECT Name||' '||LastName FROM Screenwriter WHERE filmID = {film.FilmID};");
+            fStudio.Text = V($"SELECT Name FROM Studio WHERE studioID = {film.StudioID};");
+            fProducer.Text = V($"SELECT Name||' '||LastName FROM Producer WHERE filmID = {film.FilmID};");
+            fOperator.Text = V($"SELECT Name||' '||LastName FROM Operator WHERE filmID = {film.FilmID};");
+            fComposer.Text = V($"SELECT Name||' '||LastName FROM Composer WHERE filmID = {film.FilmID};");
+            fTime.Text = film.Duratiom;
+            fEditor.Text = V($"SELECT Name||' '||LastName FROM Editor WHERE filmID = {film.FilmID};");
             fName.Text = film.Name;
-        //    fStudio.Text = V($"SELECT Name FROM Studio WHERE {film.StudioID};");
-        //    fProducer.Text = V($"SELECT Name || ' ' || LastName FROM Producer WHERE filmID = {film.FilmID};");
             fDirector.Text = film.DirectorID;
+            fBudget.Text = film.Budget;
+            fGenre.Text = V($"SELECT genre FROM Genre WHERE genreID = {V($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};")};");
             fRating.Text = film.ratingID;
             PathFilm = film.PathFilm;
-            //aText.Text = "";
 
         
         }
@@ -68,9 +73,66 @@ namespace MediaPlayer
                     SQLiteCommand cmdSelect = db.CreateCommand();
 
                     cmdSelect.CommandText = command;
+
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        r = reader.GetValue(0).ToString();
+                    }
+
+
+                    return r;
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            catch (System.Data.SQLite.SQLiteException)
+            {
+            }
+            finally
+            {
+                //   delete(IDisposable)db;
+            }
+            return "";
+        }
+
+        string P(string command) // для одиночных записей
+        {
+            SQLiteConnection db = new SQLiteConnection();
+            string r = "";
+            try
+            {
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
+
+                    cmdSelect.CommandText = command;
+
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
 
-                    return reader.GetValue(0).ToString();
+                    
+
+                    while (reader.Read())
+                    {
+                        for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
+                        {
+                            
+                                r = r + reader.GetValue(0).ToString(); ;
+                            
+                        }
+                          
+                    }
+
+
+                    return r;
 
                 }
                 catch (Exception e)
