@@ -195,6 +195,10 @@ namespace MediaPlayer
                 CinemaList.ItemsSource = findFilms;
                 DataContext = this;
             }
+            else {
+                CinemaList.ItemsSource = films;
+                DataContext = this;
+            }
         }
 
         private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)

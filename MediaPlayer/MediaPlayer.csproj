@@ -94,6 +94,9 @@
     <Compile Include="AddFilm.xaml.cs">
       <DependentUpon>AddFilm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BDChange.xaml.cs">
+      <DependentUpon>BDChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BufferPage.xaml.cs">
       <DependentUpon>BufferPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddFilm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BDChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

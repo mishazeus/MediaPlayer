@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.Win32;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,41 +15,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Data.SQLite;
-using System.IO;
 
 namespace MediaPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для settings.xaml
+    /// Логика взаимодействия для BDChange.xaml
     /// </summary>
-    public partial class settings : Page
+    public partial class BDChange : Page
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
 
-        public settings()
+        public BDChange()
         {
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
-            frame.Navigate(new BDChange());
 
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                //FilePath = openFileDialog.FileName;
-                //return true;
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new AddFilm());
         }
 
         string P(string command)
@@ -57,7 +42,7 @@ namespace MediaPlayer
             try
             {
                 //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + "C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
                 //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
                 db.Open();
                 try
@@ -90,6 +75,12 @@ namespace MediaPlayer
                 //   delete(IDisposable)db;
             }
             return "";
+        }
+
+        private void TableBD_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+
         }
     }
 }

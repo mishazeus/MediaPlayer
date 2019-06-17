@@ -46,10 +46,34 @@ namespace MediaPlayer
             fName.Text = film.Name;
             fDirector.Text = film.DirectorID;
             fBudget.Text = film.Budget;
-            fGenre.Text = V($"SELECT genre FROM Genre WHERE genreID = {V($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};")};");
+
+           string f(List<string> list){
+                string s = "";
+                
+                foreach (string i in list) {
+                    s = s + $"{V($"SELECT genre FROM Genre WHERE genreID = {i}")}"+" "; 
+                }
+
+                return s;
+            }
+
+            string a(List<string> list)
+            {
+                string s = "";
+
+                foreach (string i in list)
+                {
+                    s = s + $"{V($"SELECT Name ||' '|| LastName FROM Actor WHERE actorID = {i}")}" + "\n";
+                }
+
+                return s;
+            }
+
+            fGenre.Text = f(P($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};"));
+             //V($"SELECT genre FROM Genre WHERE genreID = {V($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};")};");
             fRating.Text = film.ratingID;
             PathFilm = film.PathFilm;
-
+            aText.Text = "В главных ролях:\n"+a(P($"SELECT actorID FROM ListActor WHERE filmID = {film.FilmID};"));
         
         }
 
@@ -100,10 +124,11 @@ namespace MediaPlayer
             return "";
         }
 
-        string P(string command) // для одиночных записей
+        List<string> P(string command) // для одиночных записей
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
+            List<string> more = new List<string>();
             try
             {
                 //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
@@ -118,21 +143,19 @@ namespace MediaPlayer
 
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
 
-                    
+                   
 
                     while (reader.Read())
                     {
                         for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
                         {
-                            
-                                r = r + reader.GetValue(0).ToString(); ;
-                            
+                            more.Add(reader.GetValue(0).ToString());  
                         }
                           
                     }
 
 
-                    return r;
+                    return more;
 
                 }
                 catch (Exception e)
@@ -148,7 +171,7 @@ namespace MediaPlayer
             {
                 //   delete(IDisposable)db;
             }
-            return "";
+            return more;
         }
 
 

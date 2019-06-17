@@ -861,21 +861,24 @@ namespace MediaPlayer
             actors2.Add(actors[Actor.SelectedIndex]);
             ActorList.Items.Refresh();
 
+
+
         }
  
 
         private void ActorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //int index = ActorList.SelectedIndex;
-            //var obj = ActorList.Items[index];
+            Actor ac = new MediaPlayer.Actor();
+            foreach (Actor actor in actors2)
+            {
+                if (actor == ActorList.SelectedItem)
+                {
+                    ac = actor;
+                }
+            }
 
-            //actors2.Remove();
-            //ActorList.Items.Refresh();
-
-            //var dependencyObject = (DependencyObject)sender;
-            //var item = (ListBoxItem)ActorList.ContainerFromElement(dependencyObject);
-            //ActorList.Items.Remove(item);
-
+            actors2.Remove(ac);
+            ActorList.Items.Refresh();
         }
 
        

@@ -25,7 +25,7 @@
 
         <TextBlock x:Name="aText" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Text="В главных ролях:" Grid.Column="5" FontSize="21"/>
         <Button Content="К просмотру фильма" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="26" VerticalAlignment="Top" Click="Button_Click"/>
-        <Grid Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Top" >
+        <Grid Grid.Column="3" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -45,7 +45,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="fYear"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" FontSize="21"/>
