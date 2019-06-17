@@ -97,8 +97,8 @@
     <Compile Include="BDChange.xaml.cs">
       <DependentUpon>BDChange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BufferPage.xaml.cs">
-      <DependentUpon>BufferPage.xaml</DependentUpon>
+    <Compile Include="BufferWindow.xaml.cs">
+      <DependentUpon>BufferWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Composer.cs" />
     <Compile Include="Director.cs" />
@@ -136,7 +136,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BufferPage.xaml">
+    <Page Include="BufferWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

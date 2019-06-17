@@ -48,13 +48,13 @@ namespace MediaPlayer
         List<Genre> genres;
         Actor actor;
         List<Actor> actors;
-        List<Actor> actors3;
         HashSet<Actor> actors2;
 
         public AddFilm()
         {
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
+            film = new Film();
             operators = new List<Operator>();
             directors = new List<Director>();
             screenwriters = new List<Screenwriter>();
@@ -66,21 +66,10 @@ namespace MediaPlayer
             composers = new List<Composer>();
             genres = new List<Genre>();
             actors = new List<Actor>();
-            actors3 = new List<Actor>();
             actors2 = new HashSet<Actor>();
-            
-            
-            getDirector("SELECT * FROM Director;", directors); 
-            getScreenwriter("SELECT * FROM Screenwriter;", screenwriters);
-            getOperator("SELECT * FROM Operator;", operators);
-            getLocation("SELECT * FROM Location;", locations);
-            getRating("SELECT * FROM Rating;", ratings);
-            getStudio("SELECT * FROM Studio;", studios);
-            getProducer("SELECT * FROM Producer;", producers);
-            getEditor("SELECT * FROM Editor;", editors);
-            getComposer("SELECT * FROM Composer;", composers);
-            getGenre("SELECT * FROM Genre;", genres);
-            getActor("SELECT * FROM Actor;", actors);
+
+            updateList(); 
+           
            
            Director.ItemsSource = directors; 
            Screenwriter.ItemsSource = screenwriters;
@@ -96,13 +85,106 @@ namespace MediaPlayer
            ActorList.ItemsSource = actors2;
            DataContext = this;
            ActorSelect.onNameSend += Page1_onNameSend;
+           BufferWindow.onNameSend += Page2_onNameSend;
         }
+
+        public AddFilm(string actor1, string director1, string oper1, string screenwriter1, string location1, string rating1, string studio1, string editor1, string composer1, string genre1, string producer1)
+        {
+            InitializeComponent();
+            Path = Directory.GetParent(standartPath).ToString();
+            film = new Film();
+            operators = new List<Operator>();
+            directors = new List<Director>();
+            screenwriters = new List<Screenwriter>();
+            locations = new List<Location>();
+            ratings = new List<Rating>();
+            studios = new List<Studio>();
+            producers = new List<Producer>();
+            editors = new List<Editor>();
+            composers = new List<Composer>();
+            genres = new List<Genre>();
+            actors = new List<Actor>();
+            actors2 = new HashSet<Actor>();
+
+            updateList();
+
+
+            Director.ItemsSource = directors;
+            Screenwriter.ItemsSource = screenwriters;
+            Operator.ItemsSource = operators;
+            Country.ItemsSource = locations;
+            Rating.ItemsSource = ratings;
+            Producer.ItemsSource = producers;
+            Studio.ItemsSource = studios;
+            Editor.ItemsSource = editors;
+            Composer.ItemsSource = composers;
+            Genre.ItemsSource = genres;
+            Actor.ItemsSource = actors;
+            ActorList.ItemsSource = actors2;
+            DataContext = this;
+
+            Director.SelectedItem = director1;
+            Screenwriter.SelectedItem = screenwriter1;
+            Operator.SelectedItem = oper1;
+            Country.SelectedItem = location1;
+            Rating.SelectedItem = rating1;
+            Producer.SelectedItem = producer1;
+            Studio.SelectedItem = studio1;
+            Editor.SelectedItem = editor1;
+            Composer.SelectedItem = composer1;
+           // Genre.SelectedItem = genre1;
+            
+            //ActorList.ItemsSource = actors2;
+
+            ActorSelect.onNameSend += Page1_onNameSend;
+            BufferWindow.onNameSend += Page2_onNameSend;
+        }
+
+        void updateList() {
+            getDirector("SELECT * FROM Director;", directors);
+            getScreenwriter("SELECT * FROM Screenwriter;", screenwriters);
+            getOperator("SELECT * FROM Operator;", operators);
+            getLocation("SELECT * FROM Location;", locations);
+            getRating("SELECT * FROM Rating;", ratings);
+            getStudio("SELECT * FROM Studio;", studios);
+            getProducer("SELECT * FROM Producer;", producers);
+            getEditor("SELECT * FROM Editor;", editors);
+            getComposer("SELECT * FROM Composer;", composers);
+            getGenre("SELECT * FROM Genre;", genres);
+            getActor("SELECT * FROM Actor;", actors);
+        }
+
+        void updateComboB() {
+            Actor.Items.Refresh();
+            Producer.Items.Refresh();
+            Director.Items.Refresh();
+            Screenwriter.Items.Refresh();
+            Operator.Items.Refresh();
+            Country.Items.Refresh();
+            Studio.Items.Refresh();
+            Editor.Items.Refresh();
+            Composer.Items.Refresh();
+            Genre.Items.Refresh();
+        }
+
+       
 
         void Page1_onNameSend(bool tr)
         {
             if (tr == true)
             {
-                Actor.Items.Refresh();
+                updateList();
+                updateComboB();
+            }
+
+        }
+
+        void Page2_onNameSend(bool tr)
+        {
+            if (tr == true)
+            {
+                updateList();
+                updateComboB();
             }
 
         }
@@ -114,8 +196,8 @@ namespace MediaPlayer
                 && Producer.SelectedItem != null && Operator.SelectedItem != null && Composer.SelectedItem != null && Time.Text != "" && Editor.SelectedItem != null
                 && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
-                MessageBox.Show("sdgdg");
-                //P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{}', {}, {}, '{}', '{}', {}, '{}'); ");
+               
+                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{Name.Text}', '{V($"SELECT directorID FROM Director WHERE Name||' '||LastName = {Director.Text};")}', '{V($"SELECT studioID FROM Studio WHERE Name = {Studio.Text};")}', '{Time.Text}', '{film.PathFilm}', '{Rating.Text}', '{film.PathLogo}'); ");
             }
             else {
                 //r0.Fill = Brushes.Red;
@@ -200,27 +282,32 @@ namespace MediaPlayer
 
         private void FDirector_Click(object sender, RoutedEventArgs e)
         {
-         
+            ActorSelect actorSelect = new ActorSelect("Name", "LastName", "YearOfBorn", "Director");
+            actorSelect.Show();
         }
 
         private void FScreenwriter_Click(object sender, RoutedEventArgs e)
         {
-         
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Screenwriter");
+            actorSelect.Show();
         }
 
         private void FProducer_Click(object sender, RoutedEventArgs e)
         {
-          
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Producer");
+            actorSelect.Show();
         }
 
         private void FOperator_Click(object sender, RoutedEventArgs e)
         {
-         
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Operator");
+            actorSelect.Show();
         }
 
         private void FComposer_Click(object sender, RoutedEventArgs e)
         {
-         
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Composer");
+            actorSelect.Show();
         }
 
         private void FTime_Click(object sender, RoutedEventArgs e)
@@ -234,7 +321,8 @@ namespace MediaPlayer
 
         private void FEditor_Click(object sender, RoutedEventArgs e)
         {
-           
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Editor");
+            actorSelect.Show();
         }
 
         private void FGenre_Click(object sender, RoutedEventArgs e)
@@ -297,8 +385,8 @@ namespace MediaPlayer
 
                     cmdSelect.CommandText = command;
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
-
-                   return reader.GetValue(0).ToString();
+                    r = reader.GetValue(0).ToString();
+                    return r;
 
                 }
                 catch (Exception e)
@@ -314,7 +402,7 @@ namespace MediaPlayer
             {
                 //   delete(IDisposable)db;
             }
-            return "";
+            return r;
         }
 
         void getDirector(string command, List<Director> list)
@@ -857,12 +945,9 @@ namespace MediaPlayer
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-            ActorSelect actorSelect = new ActorSelect();
+        {        
+            ActorSelect actorSelect = new ActorSelect("Name","LastName","YearOfBorn","Actor");
             actorSelect.Show();
-
-           
         }
 
         private void Actor_SelectionChanged(object sender, SelectionChangedEventArgs e)

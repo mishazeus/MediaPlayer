@@ -25,16 +25,20 @@ namespace MediaPlayer
         public delegate void SendEv(bool trig);
         public static event SendEv onNameSend;
 
-        public ActorSelect(){
+        public ActorSelect(string col1, string col2, string col3, string titleName){
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
-
+            selectWindow.Title = titleName;
+            c1.Text = col1;
+            c2.Text = col2;
+            c3.Text = col3;
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Col1.Text!="" && Col2.Text!="" && Col3.Text!="") {
-                V($"INSERT INTO 'main'.'Actor'('Name','LastName','YearOfBorn') VALUES ('{Col1.Text}', '{Col2.Text}', '{Col3.Text}');");
+                V($"INSERT INTO 'main'.'{Title}'('{c1.Text}','{c2.Text}','{c3.Text}') VALUES ('{Col1.Text}', '{Col2.Text}', '{Col3.Text}');");
                 onNameSend(true);
                 this.Close();
             }
