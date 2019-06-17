@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="BufferPage" Height="auto" Width="auto">
     <Grid>
-        <TextBox HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox  Grid.Column ="0"  TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox  Grid.Column ="1"  TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox  Grid.Column ="2"  TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
     </Grid>
 </Window>

@@ -5,32 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayer"
         mc:Ignorable="d"
-        Title="ActorSelect" Height="450" Width="450">
+        Title="ActorSelect" Height="250" Width="450">
     <Grid>
-        <ListBox x:Name="ListActor" SelectionChanged="ListActor_SelectionChanged" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="5"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="1"  FontSize="21" Text="{Binding Id}"/>
-                        <TextBlock Grid.Column="3"  FontSize="21" Text="{Binding Name}"/>
-                        <TextBlock Grid.Column="5"  FontSize="21" Text="{Binding LastName}"/>
-                        <TextBlock Grid.Column="7"  FontSize="21" Text="{Binding LastName}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="Col1" Grid.Column ="0"  TextWrapping="Wrap" />
+        <TextBox x:Name="Col2" Grid.Column ="1"  TextWrapping="Wrap" />
+        <TextBox x:Name="Col3" Grid.Column ="2"  TextWrapping="Wrap"  />
+        <Button Content="Создать" Grid.Column="2"   VerticalAlignment="Bottom" Click="Button_Click"/>
     </Grid>
 </Window>

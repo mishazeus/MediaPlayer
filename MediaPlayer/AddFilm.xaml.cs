@@ -25,7 +25,6 @@ namespace MediaPlayer
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
-        public delegate bool Predicate<in Actor>(Actor obj);
 
         Film film;
         Operator operat;
@@ -95,8 +94,16 @@ namespace MediaPlayer
            Genre.ItemsSource = genres;
            Actor.ItemsSource = actors;
            ActorList.ItemsSource = actors2;
-
            DataContext = this;
+           ActorSelect.onNameSend += Page1_onNameSend;
+        }
+
+        void Page1_onNameSend(bool tr)
+        {
+            if (tr == true)
+            {
+                Actor.Items.Refresh();
+            }
 
         }
 
@@ -851,20 +858,18 @@ namespace MediaPlayer
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //ActorSelect actorSelect = new ActorSelect(actors);
-            //actorSelect.Show();
-        }
+            
+            ActorSelect actorSelect = new ActorSelect();
+            actorSelect.Show();
 
+           
+        }
 
         private void Actor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             actors2.Add(actors[Actor.SelectedIndex]);
             ActorList.Items.Refresh();
-
-
-
         }
- 
 
         private void ActorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -880,8 +885,6 @@ namespace MediaPlayer
             actors2.Remove(ac);
             ActorList.Items.Refresh();
         }
-
-       
 
         private void Country_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -932,5 +935,6 @@ namespace MediaPlayer
         {
                 r13.Fill = Brushes.Green;
         }
+   
     }
 }
