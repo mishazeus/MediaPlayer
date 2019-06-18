@@ -28,26 +28,26 @@ namespace MediaPlayer
 
         Film film;
         Operator operat;
-        List<Operator> operators;
-        List<Director> directors;
+        HashSet<Operator> operators;
+        HashSet<Director> directors;
         Location location;
-        List<Location> locations;
+        HashSet<Location> locations;
         Studio studio;
-        List<Studio> studios;
+        HashSet<Studio> studios;
         Rating rating;
-        List<Rating> ratings;
+        HashSet<Rating> ratings;
         Screenwriter screenwriter;
-        List<Screenwriter> screenwriters;
+        HashSet<Screenwriter> screenwriters;
         Producer producer;
-        List<Producer> producers;
+        HashSet<Producer> producers;
         Editor editor;
-        List<Editor>editors;
+        HashSet<Editor>editors;
         Composer composer;
-        List<Composer> composers;
+        HashSet<Composer> composers;
         Genre genre;
-        List<Genre> genres;
+        HashSet<Genre> genres;
         Actor actor;
-        List<Actor> actors;
+        HashSet<Actor> actors;
         HashSet<Actor> actors2;
 
         public AddFilm()
@@ -55,17 +55,17 @@ namespace MediaPlayer
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             film = new Film();
-            operators = new List<Operator>();
-            directors = new List<Director>();
-            screenwriters = new List<Screenwriter>();
-            locations = new List<Location>();
-            ratings = new List<Rating>();
-            studios = new List<Studio>();
-            producers = new List<Producer>();
-            editors = new List<Editor>();
-            composers = new List<Composer>();
-            genres = new List<Genre>();
-            actors = new List<Actor>();
+            operators = new HashSet<Operator>();
+            directors = new HashSet<Director>();
+            screenwriters = new HashSet<Screenwriter>();
+            locations = new HashSet<Location>();
+            ratings = new HashSet<Rating>();
+            studios = new HashSet<Studio>();
+            producers = new HashSet<Producer>();
+            editors = new HashSet<Editor>();
+            composers = new HashSet<Composer>();
+            genres = new HashSet<Genre>();
+            actors = new HashSet<Actor>();
             actors2 = new HashSet<Actor>();
 
             updateList(); 
@@ -85,7 +85,7 @@ namespace MediaPlayer
            ActorList.ItemsSource = actors2;
            DataContext = this;
            ActorSelect.onNameSend += Page1_onNameSend;
-           BufferWindow.onNameSend += Page2_onNameSend;
+        //   BufferWindow.onNameSend += Page2_onNameSend;
         }
 
         public AddFilm(string actor1, string director1, string oper1, string screenwriter1, string location1, string rating1, string studio1, string editor1, string composer1, string genre1, string producer1)
@@ -93,17 +93,17 @@ namespace MediaPlayer
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             film = new Film();
-            operators = new List<Operator>();
-            directors = new List<Director>();
-            screenwriters = new List<Screenwriter>();
-            locations = new List<Location>();
-            ratings = new List<Rating>();
-            studios = new List<Studio>();
-            producers = new List<Producer>();
-            editors = new List<Editor>();
-            composers = new List<Composer>();
-            genres = new List<Genre>();
-            actors = new List<Actor>();
+            operators = new HashSet<Operator>();
+            directors = new HashSet<Director>();
+            screenwriters = new HashSet<Screenwriter>();
+            locations = new HashSet<Location>();
+            ratings = new HashSet<Rating>();
+            studios = new HashSet<Studio>();
+            producers = new HashSet<Producer>();
+            editors = new HashSet<Editor>();
+            composers = new HashSet<Composer>();
+            genres = new HashSet<Genre>();
+            actors = new HashSet<Actor>();
             actors2 = new HashSet<Actor>();
 
             updateList();
@@ -137,7 +137,7 @@ namespace MediaPlayer
             //ActorList.ItemsSource = actors2;
 
             ActorSelect.onNameSend += Page1_onNameSend;
-            BufferWindow.onNameSend += Page2_onNameSend;
+         //   BufferWindow.onNameSend += Page2_onNameSend;
         }
 
         void updateList() {
@@ -167,27 +167,41 @@ namespace MediaPlayer
             Genre.Items.Refresh();
         }
 
+        void deleteDirector() {
+            Director d = new MediaPlayer.Director();
+            foreach (Director director in directors)
+            {
+                if (actor == ActorList.SelectedItem)
+                {
+                    d = director;
+                }
+            }
+            directors.Remove(d);
+        }
        
 
         void Page1_onNameSend(bool tr)
         {
             if (tr == true)
             {
+                
+                deleteDirector();
                 updateList();
                 updateComboB();
             }
 
         }
 
-        void Page2_onNameSend(bool tr)
-        {
-            if (tr == true)
-            {
-                updateList();
-                updateComboB();
-            }
+        //void Page2_onNameSend(bool tr)
+        //{
+        //    if (tr == true)
+        //    {
+        //        deleteDirector();
+        //        updateList();
+        //        updateComboB();
+        //    }
 
-        }
+        //}
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -405,7 +419,7 @@ namespace MediaPlayer
             return r;
         }
 
-        void getDirector(string command, List<Director> list)
+        void getDirector(string command, HashSet<Director> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             
@@ -454,7 +468,7 @@ namespace MediaPlayer
           
         }
 
-        void getScreenwriter(string command, List<Screenwriter> list)
+        void getScreenwriter(string command, HashSet<Screenwriter> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
@@ -503,7 +517,7 @@ namespace MediaPlayer
             }
         }
 
-        void getOperator(string command, List<Operator> list)
+        void getOperator(string command, HashSet<Operator> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
@@ -552,7 +566,7 @@ namespace MediaPlayer
             }
         }
 
-        void getLocation(string command, List<Location> list)
+        void getLocation(string command, HashSet<Location> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             string r = "";
@@ -600,7 +614,7 @@ namespace MediaPlayer
             }
         }
 
-        void getRating(string command, List<Rating> list)
+        void getRating(string command, HashSet<Rating> list)
         {
             SQLiteConnection db = new SQLiteConnection();
             
@@ -648,7 +662,7 @@ namespace MediaPlayer
             }
         }
 
-        void getStudio(string command, List<Studio> list)
+        void getStudio(string command, HashSet<Studio> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -697,7 +711,7 @@ namespace MediaPlayer
             }
         }
 
-        void getProducer(string command, List<Producer> list)
+        void getProducer(string command, HashSet<Producer> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -747,7 +761,7 @@ namespace MediaPlayer
             }
         }
 
-        void getEditor(string command, List<Editor> list)
+        void getEditor(string command, HashSet<Editor> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -797,7 +811,7 @@ namespace MediaPlayer
             }
         }
 
-        void getComposer(string command, List<Composer> list)
+        void getComposer(string command, HashSet<Composer> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -847,7 +861,7 @@ namespace MediaPlayer
             }
         }
 
-        void getGenre(string command, List<Genre> list)
+        void getGenre(string command, HashSet<Genre> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -895,7 +909,7 @@ namespace MediaPlayer
             }
         }
 
-        void getActor(string command, List<Actor> list)
+        void getActor(string command, HashSet<Actor> list)
         {
             SQLiteConnection db = new SQLiteConnection();
 
@@ -952,7 +966,16 @@ namespace MediaPlayer
 
         private void Actor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            actors2.Add(actors[Actor.SelectedIndex]);
+            Actor ac = new MediaPlayer.Actor();
+            foreach (Actor actor in actors)
+            {
+                if (actor == Actor.SelectedItem)
+                {
+                    ac = actor;
+                }
+            }
+           
+            actors2.Add(ac);
             ActorList.Items.Refresh();
         }
 
