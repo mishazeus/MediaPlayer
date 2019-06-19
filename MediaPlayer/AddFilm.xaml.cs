@@ -84,8 +84,8 @@ namespace MediaPlayer
            Actor.ItemsSource = actors;
            ActorList.ItemsSource = actors2;
            DataContext = this;
-           ActorSelect.onNameSend += Page1_onNameSend;
-        //   BufferWindow.onNameSend += Page2_onNameSend;
+           
+           BufferWindow.onNamesend += Page2_onNamesend;
         }
 
         public AddFilm(string actor1, string director1, string oper1, string screenwriter1, string location1, string rating1, string studio1, string editor1, string composer1, string genre1, string producer1)
@@ -136,8 +136,8 @@ namespace MediaPlayer
             
             //ActorList.ItemsSource = actors2;
 
-            ActorSelect.onNameSend += Page1_onNameSend;
-         //   BufferWindow.onNameSend += Page2_onNameSend;
+           
+            BufferWindow.onNamesend += Page2_onNamesend;
         }
 
         void updateList() {
@@ -171,7 +171,7 @@ namespace MediaPlayer
             Director d = new MediaPlayer.Director();
             foreach (Director director in directors)
             {
-                if (actor == ActorList.SelectedItem)
+                if (director == ActorList.SelectedItem)
                 {
                     d = director;
                 }
@@ -180,28 +180,16 @@ namespace MediaPlayer
         }
        
 
-        void Page1_onNameSend(bool tr)
+      
+
+        void Page2_onNamesend(bool tr)
         {
             if (tr == true)
             {
-                
-                deleteDirector();
-                updateList();
-                updateComboB();
+              
             }
 
         }
-
-        //void Page2_onNameSend(bool tr)
-        //{
-        //    if (tr == true)
-        //    {
-        //        deleteDirector();
-        //        updateList();
-        //        updateComboB();
-        //    }
-
-        //}
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -211,7 +199,7 @@ namespace MediaPlayer
                 && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
                
-                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget') VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.Text}', '{film.PathLogo}', '{Year.Text}','{Budget.Text}'); ");
+                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget') VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.SelectedIndex}', '{film.PathLogo}', '{Year.Text}','{Budget.Text}'); ");
             }
             else {
                 //r0.Fill = Brushes.Red;
@@ -247,9 +235,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -296,7 +284,7 @@ namespace MediaPlayer
 
         private void FDirector_Click(object sender, RoutedEventArgs e)
         {
-            ActorSelect actorSelect = new ActorSelect("Name", "LastName", "YearOfBorn", "Director");
+            BufferWindow actorSelect = new BufferWindow("Name", "LastName", "Director");
             actorSelect.Show();
         }
 
@@ -389,9 +377,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -425,7 +413,7 @@ namespace MediaPlayer
             
             try
             {
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
                 
                 db.Open();
                 try
@@ -474,9 +462,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -523,9 +511,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -572,9 +560,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -620,9 +608,9 @@ namespace MediaPlayer
             
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -668,9 +656,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -717,9 +705,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -738,8 +726,7 @@ namespace MediaPlayer
                                 case 0: { producer.ProducerID = reader.GetValue(colCtr).ToString(); } break;
                                 case 1: { producer.Name = reader.GetValue(colCtr).ToString(); } break;
                                 case 2: { producer.LastName = reader.GetValue(colCtr).ToString(); } break;
-                                case 3: { producer.FilmID = reader.GetValue(colCtr).ToString(); } break;
-
+                            
                             }
                         }
                         list.Add(producer);
@@ -767,9 +754,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -817,9 +804,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -867,9 +854,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -915,9 +902,9 @@ namespace MediaPlayer
 
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -960,7 +947,7 @@ namespace MediaPlayer
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {        
-            ActorSelect actorSelect = new ActorSelect("Name","LastName","YearOfBorn","Actor");
+            BufferWindow actorSelect = new BufferWindow("Name","LastName","Actor");
             actorSelect.Show();
         }
 

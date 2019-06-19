@@ -12,13 +12,6 @@ namespace MediaPlayer
         public string Ratings { get; set; }
 
 
-        public Rating(string ratingid, string rating)
-        {
-            RatingID = ratingid;
-            Ratings = rating;
-
-        }
-
         public Rating()
         {
             RatingID = "";

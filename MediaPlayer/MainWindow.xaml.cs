@@ -64,12 +64,10 @@ namespace MediaPlayer
         List<Film> BD(string command, List<Film> list) {
             SQLiteConnection db = new SQLiteConnection();
 
-            string filmid=""; string name=""; string directorid=""; string studioid=""; string duratiom=""; string pathlogo=""; string ratingid=""; string pathfilm=""; string year = ""; string budget = "";
-
             try
             {
                 
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString()+"\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString()+"\\Resurses\\filmdatabase.db" + "\"";
          
                 db.Open();
                 try
@@ -80,31 +78,43 @@ namespace MediaPlayer
 
                     while (reader.Read())
                     {
-                        Film film;
+                        Film film = new Film();
                         for (int colCtr = 0; colCtr < reader.FieldCount; ++colCtr)
                         {
                             switch (colCtr)
                             {
-                                case 0: { filmid = reader.GetValue(colCtr).ToString(); } break;
-                                case 1: { name = reader.GetValue(colCtr).ToString(); } break;
-                                case 2: { directorid = reader.GetValue(colCtr).ToString();
-                                        int bufferid = Convert.ToInt32(directorid);
-                         directorid = P($"SELECT Name||' '||LastName FROM Director WHERE directorID = {bufferid};");
+                                case 0: { film.FilmID = reader.GetValue(colCtr).ToString(); } break;
+                                case 1: { film.Name = reader.GetValue(colCtr).ToString(); } break;
+                                case 2: { film.DirectorID = reader.GetValue(colCtr).ToString();
+                                 film.DirectorID = P($"SELECT Name||' '||LastName FROM Director WHERE directorID = {Convert.ToInt32(film.DirectorID)};");
                                     } break;
-                                case 3: { studioid = reader.GetValue(colCtr).ToString(); } break;
-                                case 4: { duratiom = reader.GetValue(colCtr).ToString(); } break;
-                                case 7: { pathlogo = reader.GetValue(colCtr).ToString(); } break;
-                                case 6: { ratingid = reader.GetValue(colCtr).ToString();
-                                        int bufferid = Convert.ToInt32(ratingid);
-                                        ratingid = P($"SELECT rating FROM Rating WHERE ratingID = {bufferid};");
+                                case 3: { film.StudioID = reader.GetValue(colCtr).ToString();   
                                     } break;
-                                case 5: { pathfilm = reader.GetValue(colCtr).ToString(); } break;
-                                case 8: { year = reader.GetValue(colCtr).ToString(); } break;
-                                case 9: { budget = reader.GetValue(colCtr).ToString(); } break;
+                                case 4: { film.Duratiom = reader.GetValue(colCtr).ToString(); } break;
+                                case 7: { film.PathLogo = reader.GetValue(colCtr).ToString(); } break;
+                                case 6: { film.RatingID = reader.GetValue(colCtr).ToString();
+                                     film.RatingID = P($"SELECT rating FROM Rating WHERE ratingID = {Convert.ToInt32(film.RatingID)};");
+                                    } break;
+                                case 5: { film.PathFilm = reader.GetValue(colCtr).ToString(); } break;
+                                case 8: { film.Year = reader.GetValue(colCtr).ToString(); } break;
+                                case 9: { film.Budget = reader.GetValue(colCtr).ToString(); } break;
+                                case 10: { film.ProducerID = reader.GetValue(colCtr).ToString();
+                                        film.ProducerID = P($"SELECT Name||' '||LastName FROM Producer WHERE producerID = {Convert.ToInt32(film.ProducerID)};");
+                                    } break;
+                                case 11: { film.ScreenwriterID = reader.GetValue(colCtr).ToString();
+                                        film.ScreenwriterID = P($"SELECT Name||' '||LastName FROM Screenwriter WHERE screenwriterID = {Convert.ToInt32(film.ScreenwriterID)};");
+                                    } break;
+                                case 12: { film.EditorID = reader.GetValue(colCtr).ToString();
+                                        film.EditorID = P($"SELECT Name||' '||LastName FROM Editor WHERE editorID = {Convert.ToInt32(film.EditorID)};");
+                                    } break;
+                                case 13: { film.ComposerID = reader.GetValue(colCtr).ToString();
+                                        film.ComposerID = P($"SELECT Name||' '||LastName FROM Composer WHERE composerID = {Convert.ToInt32(film.ComposerID)};");
+                                    } break;
+                                case 14: { film.OperatorID = reader.GetValue(colCtr).ToString();
+                                        film.OperatorID = P($"SELECT Name||' '||LastName FROM Operator WHERE operatorID = {Convert.ToInt32(film.OperatorID)};");
+                                    } break;
                             }
                         }
-                        
-                        film = new Film(filmid, name, directorid, studioid, duratiom, pathlogo, ratingid, pathfilm, year, budget);
 
                         list.Add(film);
                     }
@@ -130,9 +140,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -212,8 +222,13 @@ namespace MediaPlayer
             if (film.Duratiom.Equals(request)) { return Convert.ToInt32(film.FilmID); }
             if (film.Year.Equals(request)) { return Convert.ToInt32(film.FilmID); }
             if (film.StudioID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
-            if (film.ratingID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.RatingID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
             if (film.Budget.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.ProducerID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.ScreenwriterID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.EditorID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.ComposerID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
+            if (film.OperatorID.Equals(request)) { return Convert.ToInt32(film.FilmID); }
 
             return -1;
         }

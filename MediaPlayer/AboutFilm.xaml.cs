@@ -34,15 +34,15 @@ namespace MediaPlayer
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             DataContext = film;
-            fCountry.Text = V($"SELECT Country FROM Location WHERE countryID = {V($"SELECT countryID FROM Studio  WHERE studioID = {film.StudioID};")};");
+            fCountry.Text = V($"SELECT Country FROM Location WHERE countryID = {V($"SELECT countryID FROM Studio WHERE studioID = {film.StudioID};")};");
             fYear.Text = film.Year;
-            fScreenwriter.Text = V($"SELECT Name||' '||LastName FROM Screenwriter WHERE filmID = {film.FilmID};");
-            fStudio.Text = V($"SELECT Name FROM Studio WHERE studioID = {film.StudioID};");
-            fProducer.Text = V($"SELECT Name||' '||LastName FROM Producer WHERE filmID = {film.FilmID};");
-            fOperator.Text = V($"SELECT Name||' '||LastName FROM Operator WHERE filmID = {film.FilmID};");
-            fComposer.Text = V($"SELECT Name||' '||LastName FROM Composer WHERE filmID = {film.FilmID};");
+            fScreenwriter.Text = film.ScreenwriterID;
+            fStudio.Text = V($"SELECT Name FROM Studio WHERE studioID = {film.StudioID}");
+            fProducer.Text = film.ProducerID;
+            fOperator.Text = film.OperatorID;
+            fComposer.Text = film.ComposerID;
             fTime.Text = film.Duratiom;
-            fEditor.Text = V($"SELECT Name||' '||LastName FROM Editor WHERE filmID = {film.FilmID};");
+            fEditor.Text = film.EditorID;
             fName.Text = film.Name;
             fDirector.Text = film.DirectorID;
             fBudget.Text = film.Budget;
@@ -70,8 +70,8 @@ namespace MediaPlayer
             }
 
             fGenre.Text = f(P($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};"));
-             //V($"SELECT genre FROM Genre WHERE genreID = {V($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};")};");
-            fRating.Text = film.ratingID;
+            
+            fRating.Text = V($"SELECT rating FROM Rating WHERE ratingID = {film.RatingID}");
             PathFilm = film.PathFilm;
             aText.Text = "В главных ролях:\n"+a(P($"SELECT actorID FROM ListActor WHERE filmID = {film.FilmID};"));
         
@@ -88,9 +88,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {
@@ -131,9 +131,9 @@ namespace MediaPlayer
             List<string> more = new List<string>();
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {

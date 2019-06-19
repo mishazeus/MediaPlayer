@@ -24,7 +24,7 @@ namespace MediaPlayer
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
         public delegate void SendE(bool trig);
-        public static event SendE onNameSend;
+        public static event SendE onNamesend;
 
         public BufferWindow(string col1, string col2, string titleName)
         {
@@ -40,8 +40,8 @@ namespace MediaPlayer
 
             if (Col1.Text != "" && Col2.Text != "")
             {
-                V($"INSERT INTO 'main'.'{Title}'('{c1.Text}','{c2.Text}','filmID') VALUES ('{Col1.Text}', '{Col2.Text}', '{Convert.ToInt32(P("SELECT MAX(filmID)FROM Film; ")) + 1}');");
-                onNameSend(true);
+                V($"INSERT INTO 'main'.'{Title}'('{c1.Text}','{c2.Text}','filmID') VALUES ('{Col1.Text}', '{Col2.Text}');");
+                onNamesend(true);
                 this.Close();
             }
         }
@@ -52,7 +52,7 @@ namespace MediaPlayer
             try
             {
 
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
 
                 db.Open();
                 try
@@ -86,9 +86,9 @@ namespace MediaPlayer
             string r = "";
             try
             {
-                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
-                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\film.db" + "\"";
-                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\film.db
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
                 db.Open();
                 try
                 {

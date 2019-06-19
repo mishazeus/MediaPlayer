@@ -11,7 +11,6 @@ namespace MediaPlayer
         public string ProducerID { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string FilmID { get; set; }
 
 
         public Producer(string producerid, string name, string lastname, string filmid)
@@ -19,7 +18,7 @@ namespace MediaPlayer
             ProducerID = producerid;
             Name = name;
             LastName = lastname;
-            FilmID = filmid;
+           
 
         }
 
@@ -28,7 +27,7 @@ namespace MediaPlayer
             ProducerID = "";
             Name = "";
             LastName = "";
-            FilmID = "";
+           
 
         }
     }

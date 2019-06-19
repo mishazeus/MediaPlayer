@@ -11,14 +11,6 @@ namespace MediaPlayer
         public string GenreID { get; set; }
         public string Genres { get; set; }
 
-
-        public Genre(string genreid, string genre)
-        {
-            GenreID = genreid;
-            Genres = genre;
-
-        }
-
         public Genre()
         {
             GenreID = "";

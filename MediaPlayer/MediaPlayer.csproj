@@ -88,9 +88,6 @@
       <DependentUpon>AboutFilm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actor.cs" />
-    <Compile Include="ActorSelect.xaml.cs">
-      <DependentUpon>ActorSelect.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddFilm.xaml.cs">
       <DependentUpon>AddFilm.xaml</DependentUpon>
     </Compile>
@@ -121,10 +118,6 @@
     <Compile Include="SSDP.cs" />
     <Compile Include="Studio.cs" />
     <Page Include="AboutFilm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ActorSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,6 +183,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resurses\film.db.sqbpro" />
+    <None Include="Resurses\filmdatabase.db" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
