@@ -211,7 +211,7 @@ namespace MediaPlayer
                 && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
                
-                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo') VALUES('{Name.Text}', '{V($"SELECT directorID FROM Director WHERE Name||' '||LastName = {Director.Text};")}', '{V($"SELECT studioID FROM Studio WHERE Name = {Studio.Text};")}', '{Time.Text}', '{film.PathFilm}', '{Rating.Text}', '{film.PathLogo}'); ");
+                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget') VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.Text}', '{film.PathLogo}', '{Year.Text}','{Budget.Text}'); ");
             }
             else {
                 //r0.Fill = Brushes.Red;
@@ -256,8 +256,8 @@ namespace MediaPlayer
                     SQLiteCommand cmdSelect = db.CreateCommand();
 
                     cmdSelect.CommandText = command;
-        
 
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
                 }
                 catch (Exception e)
                 {
