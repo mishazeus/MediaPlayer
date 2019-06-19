@@ -71,7 +71,7 @@ namespace MediaPlayer
 
             fGenre.Text = f(P($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};"));
             
-            fRating.Text = V($"SELECT rating FROM Rating WHERE ratingID = {film.RatingID}");
+            fRating.Text = film.RatingID;
             PathFilm = film.PathFilm;
             aText.Text = "В главных ролях:\n"+a(P($"SELECT actorID FROM ListActor WHERE filmID = {film.FilmID};"));
         

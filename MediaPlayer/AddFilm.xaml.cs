@@ -198,10 +198,13 @@ namespace MediaPlayer
                 && Producer.SelectedItem != null && Operator.SelectedItem != null && Composer.SelectedItem != null && Time.Text != "" && Editor.SelectedItem != null
                 && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
-               
-                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget') VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.SelectedIndex}', '{film.PathLogo}', '{Year.Text}','{Budget.Text}'); ");
+                char ch1 = '\\';
+                char ch2 = '/';
+                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget','producerID','screenwriterID','editorID','composerID','operatorID')" +
+                  $" VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.SelectedIndex}', '{film.PathLogo.Replace(ch1,ch2)}', '{Year.Text}','{Budget.Text}','{Producer.Text}','{Screenwriter.Text}','{Editor.Text}','{Composer.Text}','{Operator.Text}'); ");
             }
             else {
+                MessageBox.Show("Заполнены не все параметры!");
                 //r0.Fill = Brushes.Red;
                 //r1.Fill = Brushes.Red;
                 //r2.Fill = Brushes.Red;
@@ -350,7 +353,7 @@ namespace MediaPlayer
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a picture";
-            openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            openFileDialog.Filter = "ALL FILES (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
             if (openFileDialog.ShowDialog() == true) {
                 fPoster.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 film.PathLogo = openFileDialog.FileName;
