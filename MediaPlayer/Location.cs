@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaPlayer
 {
-    class Location
+   public class Location
     {
         public string CountryID { get; set; }
         public string Country { get; set; }

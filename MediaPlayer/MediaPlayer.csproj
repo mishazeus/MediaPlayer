@@ -105,6 +105,9 @@
     <Compile Include="Genre.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="OneBufferWindow.xaml.cs">
+      <DependentUpon>OneBufferWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Operator.cs" />
     <Compile Include="PlayFilm.xaml.cs">
       <DependentUpon>PlayFilm.xaml</DependentUpon>
@@ -150,6 +153,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OneBufferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PlayFilm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

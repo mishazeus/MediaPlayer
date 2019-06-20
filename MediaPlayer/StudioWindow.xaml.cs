@@ -23,18 +23,20 @@ namespace MediaPlayer
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
-        public delegate void SendE(bool trig);
-        public static event SendE onNamesend;
+        public delegate void SendStudio(bool trig);
+        public static event SendStudio onNameStudio;
 
-        HashSet<Studio> col2;
+        HashSet<Location> col2 = new HashSet<Location>();
+        Studio studio;
 
-        public StudioWindow(string col1, HashSet<Studio> list, string titleName)
+        public StudioWindow(string col1, string titleName, HashSet<Location> list )
         {
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             studioWindow.Title = titleName;
+            studio = new Studio();
             c1.Text = col1;
-            c2.Text = "Страна";
+            c2.Text = "countryID";
             col2 = list;
             Col2.ItemsSource = col2;
         }
@@ -44,8 +46,8 @@ namespace MediaPlayer
 
             if (Col1.Text != "" && Col2.Text != "")
             {
-                V($"INSERT INTO 'main'.'{Title}'('{c1.Text}','{c2.Text}') VALUES ('{Col1.Text}', '{Col2.Text}');");
-                onNamesend(true);
+                V($"INSERT INTO 'main'.'{Title}'('{c1.Text}','{c2.Text}') VALUES ('{Col1.Text}', '{studio.CountryID}');");
+                onNameStudio(true);
                 this.Close();
             }
         }
@@ -124,6 +126,15 @@ namespace MediaPlayer
                 //   delete(IDisposable)db;
             }
             return "";
+        }
+
+        private void Studio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Location s in col2) {
+                if (Col2.SelectedItem == s) {
+                    studio.CountryID  = s.CountryID;
+                }
+            }
         }
     }
 }

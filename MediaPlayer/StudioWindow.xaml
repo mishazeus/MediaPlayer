@@ -22,7 +22,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Name}"/>
+                        <TextBlock Grid.Column="0" FontWeight="Normal"  Text="{Binding Country}"/>
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

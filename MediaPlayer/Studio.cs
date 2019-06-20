@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaPlayer
 {
-    class Studio
+   public class Studio
     {
         public string StudioID { get; set; }
         public string Name { get; set; }

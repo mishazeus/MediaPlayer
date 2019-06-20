@@ -86,6 +86,8 @@ namespace MediaPlayer
             DataContext = this;
 
             BufferWindow.onNamesend += Page2_onNamesend;
+            StudioWindow.onNameStudio += Page3_onNamesend;
+            OneBufferWindow.onNameBuf += Page_onNamesend;
         }
 
         public AddFilm(string actor1, string director1, string oper1, string screenwriter1, string location1, string rating1, string studio1, string editor1, string composer1, string genre1, string producer1)
@@ -138,6 +140,7 @@ namespace MediaPlayer
 
 
             BufferWindow.onNamesend += Page2_onNamesend;
+
         }
 
         void updateList() {
@@ -166,16 +169,8 @@ namespace MediaPlayer
             Composer.Items.Refresh();
             Genre.Items.Refresh();
         }
-
-        void getIDfromList(){
-            foreach (Director d in directors) {
-                if (Director.SelectedItem == d) {
-                     d;
-                }
-            }
-
-           
-        }
+        
+        
 
         void deleteD() {
             actors.Clear();
@@ -194,6 +189,27 @@ namespace MediaPlayer
       
 
         void Page2_onNamesend(bool tr)
+        {
+            if (tr == true)
+            {
+                deleteD();
+                updateList();
+                updateComboB();
+            }
+        }
+
+        void Page3_onNamesend(bool tr)
+        {
+            if (tr == true)
+            {
+                deleteD();
+                updateList();
+                updateComboB();
+            }
+
+        }
+
+        void Page_onNamesend(bool tr)
         {
             if (tr == true)
             {
@@ -290,12 +306,14 @@ namespace MediaPlayer
 
         private void FCountry_Click(object sender, RoutedEventArgs e)
         {
-         
+            OneBufferWindow actorSelect = new OneBufferWindow("Country", "Location");
+            actorSelect.Show();
         }
 
         private void FStudio_Click(object sender, RoutedEventArgs e)
         {
-       
+            StudioWindow stSel = new StudioWindow("Name","Studio",locations);
+            stSel.Show();
         }
 
         private void FDirector_Click(object sender, RoutedEventArgs e)
@@ -359,7 +377,8 @@ namespace MediaPlayer
 
         private void FRating_Click(object sender, RoutedEventArgs e)
         {
-           
+            OneBufferWindow actorSelect = new OneBufferWindow("Country", "Location");
+            actorSelect.Show();
         }
 
         private void FPoster_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -1010,6 +1029,11 @@ namespace MediaPlayer
         private void Director_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r4.Fill = Brushes.Green;
+            foreach (Director d in directors) {
+                if (Director.SelectedItem == d) {
+                    film.DirectorID = d.DirectorID.ToString();
+                }
+            }
         }
 
         private void Screenwriter_SelectionChanged(object sender, SelectionChangedEventArgs e)
