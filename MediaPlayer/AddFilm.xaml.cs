@@ -41,7 +41,7 @@ namespace MediaPlayer
         Producer producer;
         HashSet<Producer> producers;
         Editor editor;
-        HashSet<Editor>editors;
+        HashSet<Editor> editors;
         Composer composer;
         HashSet<Composer> composers;
         Genre genre;
@@ -68,24 +68,24 @@ namespace MediaPlayer
             actors = new HashSet<Actor>();
             actors2 = new HashSet<Actor>();
 
-            updateList(); 
-           
-           
-           Director.ItemsSource = directors; 
-           Screenwriter.ItemsSource = screenwriters;
-           Operator.ItemsSource = operators;
-           Country.ItemsSource = locations;
-           Rating.ItemsSource = ratings;
-           Producer.ItemsSource = producers;
-           Studio.ItemsSource = studios;
-           Editor.ItemsSource = editors;
-           Composer.ItemsSource = composers;
-           Genre.ItemsSource = genres;
-           Actor.ItemsSource = actors;
-           ActorList.ItemsSource = actors2;
-           DataContext = this;
-           
-           BufferWindow.onNamesend += Page2_onNamesend;
+            updateList();
+
+
+            Director.ItemsSource = directors;
+            Screenwriter.ItemsSource = screenwriters;
+            Operator.ItemsSource = operators;
+            Country.ItemsSource = locations;
+            Rating.ItemsSource = ratings;
+            Producer.ItemsSource = producers;
+            Studio.ItemsSource = studios;
+            Editor.ItemsSource = editors;
+            Composer.ItemsSource = composers;
+            Genre.ItemsSource = genres;
+            Actor.ItemsSource = actors;
+            ActorList.ItemsSource = actors2;
+            DataContext = this;
+
+            BufferWindow.onNamesend += Page2_onNamesend;
         }
 
         public AddFilm(string actor1, string director1, string oper1, string screenwriter1, string location1, string rating1, string studio1, string editor1, string composer1, string genre1, string producer1)
@@ -132,11 +132,11 @@ namespace MediaPlayer
             Studio.SelectedItem = studio1;
             Editor.SelectedItem = editor1;
             Composer.SelectedItem = composer1;
-           // Genre.SelectedItem = genre1;
-            
+            // Genre.SelectedItem = genre1;
+
             //ActorList.ItemsSource = actors2;
 
-           
+
             BufferWindow.onNamesend += Page2_onNamesend;
         }
 
@@ -167,16 +167,27 @@ namespace MediaPlayer
             Genre.Items.Refresh();
         }
 
-        void deleteDirector() {
-            Director d = new MediaPlayer.Director();
-            foreach (Director director in directors)
-            {
-                if (director == ActorList.SelectedItem)
-                {
-                    d = director;
+        void getIDfromList(){
+            foreach (Director d in directors) {
+                if (Director.SelectedItem == d) {
+                     d;
                 }
             }
-            directors.Remove(d);
+
+           
+        }
+
+        void deleteD() {
+            actors.Clear();
+            producers.Clear();
+            directors.Clear();
+            screenwriters.Clear();
+            operators.Clear();
+            studios.Clear();
+            editors.Clear();
+            composers.Clear();
+            genres.Clear();
+            locations.Clear();
         }
        
 
@@ -186,7 +197,9 @@ namespace MediaPlayer
         {
             if (tr == true)
             {
-              
+                deleteD();
+                updateList();
+                updateComboB();
             }
 
         }

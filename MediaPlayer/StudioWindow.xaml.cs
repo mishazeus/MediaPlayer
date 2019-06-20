@@ -17,22 +17,26 @@ using System.Windows.Shapes;
 namespace MediaPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для BufferWindow.xaml
+    /// Логика взаимодействия для StudioWindow.xaml
     /// </summary>
-    public partial class BufferWindow : Window
+    public partial class StudioWindow : Window
     {
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
         public delegate void SendE(bool trig);
         public static event SendE onNamesend;
 
-        public BufferWindow(string col1, string col2, string titleName)
+        HashSet<Studio> col2;
+
+        public StudioWindow(string col1, HashSet<Studio> list, string titleName)
         {
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
-            selectWindow.Title = titleName;
+            studioWindow.Title = titleName;
             c1.Text = col1;
-            c2.Text = col2;
+            c2.Text = "Страна";
+            col2 = list;
+            Col2.ItemsSource = col2;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
