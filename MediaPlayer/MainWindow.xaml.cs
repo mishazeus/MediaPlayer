@@ -32,7 +32,7 @@ namespace MediaPlayer
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
 
-        List<Film> films;
+        HashSet<Film> films;
 
 
         public MainWindow()
@@ -45,11 +45,12 @@ namespace MediaPlayer
 
             Path = Directory.GetParent(standartPath).ToString();
 
-            films = new List<Film>();
+            films = new HashSet<Film>();
 
             CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
             DataContext = this;
             AboutFilm.onNameSend += Page1_onNameSend;
+            AddFilm.onNameAdd += Page_onNameSend;
         }
 
         void Page1_onNameSend(bool tr, string Path)
@@ -61,7 +62,20 @@ namespace MediaPlayer
             
         }
 
-        List<Film> BD(string command, List<Film> list) {
+        void Page_onNameSend(bool tr)
+        {
+            if (tr == true)
+            {
+                films.Clear();
+                CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
+                DataContext = this;
+                CinemaList.ItemsSource = films;
+                CinemaList.Items.Refresh();
+            }
+
+        }
+
+        HashSet<Film> BD(string command, HashSet<Film> list) {
             SQLiteConnection db = new SQLiteConnection();
 
             try
@@ -177,8 +191,14 @@ namespace MediaPlayer
 
         private void CinemaList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            frame.Navigate(new AboutFilm(films[CinemaList.SelectedIndex]));
-            frame.Background = Brushes.White;
+
+            foreach (Film f in films) {
+                if (CinemaList.SelectedItem == f) {
+                    frame.Navigate(new AboutFilm(f));
+                    frame.Background = Brushes.White;
+                }
+            }
+           
         }
 
         private void SettingsBT_Click(object sender, RoutedEventArgs e)

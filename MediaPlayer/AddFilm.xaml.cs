@@ -26,6 +26,9 @@ namespace MediaPlayer
         string standartPath = Directory.GetCurrentDirectory().ToString();
         string Path;
 
+        public delegate void SendAdd(bool trig);
+        public static event SendAdd onNameAdd;
+
         Film film;
         Operator operat;
         HashSet<Operator> operators;
@@ -50,6 +53,9 @@ namespace MediaPlayer
         HashSet<Actor> actors;
         HashSet<Actor> actors2;
 
+        string genreIO;
+
+
         public AddFilm()
         {
             InitializeComponent();
@@ -67,6 +73,7 @@ namespace MediaPlayer
             genres = new HashSet<Genre>();
             actors = new HashSet<Actor>();
             actors2 = new HashSet<Actor>();
+            genreIO = "";
 
             updateList();
 
@@ -227,10 +234,17 @@ namespace MediaPlayer
                 && Producer.SelectedItem != null && Operator.SelectedItem != null && Composer.SelectedItem != null && Time.Text != "" && Editor.SelectedItem != null
                 && Genre.SelectedItem != null && Budget.Text != "" && Rating.SelectedItem != null && Name.Text != "")
             {
-                char ch1 = '\\';
-                char ch2 = '/';
-                P($"INSERT INTO 'main'.'Film'('filmName', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'ImageLogo','Year','Budget','producerID','screenwriterID','editorID','composerID','operatorID')" +
-                  $" VALUES('{Name.Text}', '{Director.SelectedIndex}', '{Studio.SelectedIndex}', '{Time.Text}', '{film.PathFilm}', '{Rating.SelectedIndex}', '{film.PathLogo.Replace(ch1,ch2)}', '{Year.Text}','{Budget.Text}','{Producer.Text}','{Screenwriter.Text}','{Editor.Text}','{Composer.Text}','{Operator.Text}'); ");
+        char ch1 = '\\';
+        char ch2 = '/';
+        P($"INSERT INTO 'main'.'Film'('Name', 'directorID', 'studioID', 'duratiom', 'link', 'ratingID', 'PathLogo','Year','Budget','producerID','screenwriterID','editorID','composerID','operatorID')" +
+        $" VALUES('{Name.Text}', '{film.DirectorID}', '{film.StudioID}', '{Time.Text}', '{film.PathFilm}', '{film.RatingID}', '{film.PathLogo.Replace(ch1,ch2)}', '{Year.Text}','{Budget.Text}','{film.ProducerID}','{film.ScreenwriterID}','{film.EditorID}','{film.ComposerID}','{film.OperatorID}');");
+
+        P($"INSERT INTO 'main'.'ListGenre'('genreID','filmID') VALUES('{genreIO}','{V($"SELECT filmID FROM Film WHERE Name LIKE '%{Name.Text}%';")}');");
+                foreach (Actor a in actors2) {
+                    P($"INSERT INTO 'main'.'ListActor'('actorID','filmID') VALUES('{a.ActorID}','{V($"SELECT filmID FROM Film WHERE Name LIKE '%{Name.Text}%';")}');");
+                }
+                MessageBox.Show("Фильм сохранен!");
+                onNameAdd(true);
             }
             else {
                 MessageBox.Show("Заполнены не все параметры!");
@@ -363,7 +377,9 @@ namespace MediaPlayer
 
         private void FGenre_Click(object sender, RoutedEventArgs e)
         {
-           
+            OneBufferWindow actorSelect = new OneBufferWindow("Genre", "Genre");
+            actorSelect.Show();
+
         }
 
         private void FBudget_Click(object sender, RoutedEventArgs e)
@@ -422,7 +438,11 @@ namespace MediaPlayer
 
                     cmdSelect.CommandText = command;
                     SQLiteDataReader reader = cmdSelect.ExecuteReader();
-                    r = reader.GetValue(0).ToString();
+                    while (reader.Read())
+                    {
+                        r = reader.GetValue(0).ToString();
+                    }
+                   
                     return r;
 
                 }
@@ -1024,6 +1044,13 @@ namespace MediaPlayer
         private void Studio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r3.Fill = Brushes.Green;
+            foreach (Studio s in studios)
+            {
+                if (Studio.SelectedItem == s)
+                {
+                    film.StudioID = s.StudioID.ToString();
+                }
+            }
         }
 
         private void Director_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1039,36 +1066,85 @@ namespace MediaPlayer
         private void Screenwriter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r5.Fill = Brushes.Green;
+            foreach (Screenwriter s in screenwriters)
+            {
+                if (Screenwriter.SelectedItem == s)
+                {
+                    film.ScreenwriterID = s.ScreenwriterID.ToString();
+                }
+            }
         }
 
         private void Producer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r6.Fill = Brushes.Green;
+            foreach (Producer p in producers)
+            {
+                if (Producer.SelectedItem == p)
+                {
+                    film.ProducerID = p.ProducerID.ToString();
+                }
+            }
         }
 
         private void Operator_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r7.Fill = Brushes.Green;
+            foreach (Operator o in operators)
+            {
+                if (Operator.SelectedItem == o)
+                {
+                    film.OperatorID = o.OperatorID.ToString();
+                }
+            }
         }
 
         private void Composer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r8.Fill = Brushes.Green;
+            foreach (Composer c in composers)
+            {
+                if (Composer.SelectedItem == c)
+                {
+                    film.ComposerID = c.ComposerID.ToString();
+                }
+            }
         }
 
         private void Editor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r10.Fill = Brushes.Green;
+            foreach (Editor ed in editors)
+            {
+                if (Editor.SelectedItem == ed)
+                {
+                    film.EditorID = ed.EditorID.ToString();
+                }
+            }
         }
 
         private void Genre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r11.Fill = Brushes.Green;
+            foreach (Genre g in genres)
+            {
+                if (Genre.SelectedItem == g)
+                {
+                    genreIO = g.GenreID.ToString();
+                }
+            }
         }
 
         private void Rating_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 r13.Fill = Brushes.Green;
+            foreach (Rating r in ratings)
+            {
+                if (Rating.SelectedItem == r)
+                {
+                    film.RatingID = r.RatingID.ToString();
+                }
+            }
         }
    
     }
