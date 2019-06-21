@@ -51,6 +51,7 @@ namespace MediaPlayer
             DataContext = this;
             AboutFilm.onNameSend += Page1_onNameSend;
             AddFilm.onNameAdd += Page_onNameSend;
+            AboutFilm.onNameClose += Page_onNameClose;
         }
 
         void Page1_onNameSend(bool tr, string Path)
@@ -66,6 +67,20 @@ namespace MediaPlayer
         {
             if (tr == true)
             {
+                films.Clear();
+                CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
+                DataContext = this;
+                CinemaList.ItemsSource = films;
+                CinemaList.Items.Refresh();
+            }
+
+        }
+
+        void Page_onNameClose(bool tr)
+        {
+            if (tr == true)
+            {
+                frame.Navigate(null);
                 films.Clear();
                 CinemaList.ItemsSource = BD("SELECT * FROM Film;", films);
                 DataContext = this;

@@ -28,24 +28,30 @@ namespace MediaPlayer
         string PathFilm;
         public delegate void SendEvent(bool trig, string Path);
         public static event SendEvent onNameSend;
+
+        public delegate void SendClose(bool trig);
+        public static event SendClose onNameClose;
+        Film fil;
         
         public AboutFilm(Film film)
         {
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
-            DataContext = film;
+            fil = new Film();
+            fil = film;
+            DataContext = fil;
             fCountry.Text = V($"SELECT Country FROM Location WHERE countryID = {V($"SELECT countryID FROM Studio WHERE studioID = {film.StudioID};")};");
-            fYear.Text = film.Year;
-            fScreenwriter.Text = film.ScreenwriterID;
-            fStudio.Text = V($"SELECT Name FROM Studio WHERE studioID = {film.StudioID}");
-            fProducer.Text = film.ProducerID;
-            fOperator.Text = film.OperatorID;
-            fComposer.Text = film.ComposerID;
-            fTime.Text = film.Duratiom;
-            fEditor.Text = film.EditorID;
-            fName.Text = film.Name;
-            fDirector.Text = film.DirectorID;
-            fBudget.Text = film.Budget;
+            fYear.Text = fil.Year;
+            fScreenwriter.Text = fil.ScreenwriterID;
+            fStudio.Text = V($"SELECT Name FROM Studio WHERE studioID = {fil.StudioID}");
+            fProducer.Text = fil.ProducerID;
+            fOperator.Text = fil.OperatorID;
+            fComposer.Text = fil.ComposerID;
+            fTime.Text = fil.Duratiom;
+            fEditor.Text = fil.EditorID;
+            fName.Text = fil.Name;
+            fDirector.Text = fil.DirectorID;
+            fBudget.Text = fil.Budget;
 
            string f(List<string> list){
                 string s = "";
@@ -69,11 +75,11 @@ namespace MediaPlayer
                 return s;
             }
 
-            fGenre.Text = f(P($"SELECT genreID FROM ListGenre WHERE filmID = {film.FilmID};"));
+            fGenre.Text = f(P($"SELECT genreID FROM ListGenre WHERE filmID = {fil.FilmID};"));
             
-            fRating.Text = film.RatingID;
-            PathFilm = film.PathFilm;
-            aText.Text = "В главных ролях:\n"+a(P($"SELECT actorID FROM ListActor WHERE filmID = {film.FilmID};"));
+            fRating.Text = fil.RatingID;
+            PathFilm = fil.PathFilm;
+            aText.Text = "В главных ролях:\n"+a(P($"SELECT actorID FROM ListActor WHERE filmID = {fil.FilmID};"));
         
         }
 
@@ -174,6 +180,47 @@ namespace MediaPlayer
             return more;
         }
 
+        void BD(string command)
+        {
+            SQLiteConnection db = new SQLiteConnection();
+            string r = "";
+            try
+            {
+                //C:\\Users\\Михаил\\source\\repos\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.ConnectionString = "Data Source=\"" + Directory.GetParent(Path).ToString() + "\\Resurses\\filmdatabase.db" + "\"";
+                //C:\\Users\\Mikhail\\Source\\Repos\\mishazeus\\MediaPlayer\\MediaPlayer\\Resurses\\filmdatabase.db
+                db.Open();
+                try
+                {
+                    SQLiteCommand cmdSelect = db.CreateCommand();
 
+                    cmdSelect.CommandText = command;
+
+                    SQLiteDataReader reader = cmdSelect.ExecuteReader();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error Executing SQL: " + e.ToString(), "Exception While Displaying MyTable ...");
+                }
+                db.Close();
+            }
+            catch (System.Data.SQLite.SQLiteException)
+            {
+            }
+            finally
+            {
+                //   delete(IDisposable)db;
+            }
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            BD($"DELETE FROM ListGenre WHERE filmID = {fil.FilmID};");
+            BD($"DELETE FROM ListActor WHERE filmID = {fil.FilmID};");
+            BD($"DELETE FROM Film WHERE filmID = {fil.FilmID};");
+            onNameClose(true);
+
+        }
     }
 }

@@ -102,6 +102,7 @@ namespace MediaPlayer
             InitializeComponent();
             Path = Directory.GetParent(standartPath).ToString();
             film = new Film();
+
             operators = new HashSet<Operator>();
             directors = new HashSet<Director>();
             screenwriters = new HashSet<Screenwriter>();
@@ -116,7 +117,6 @@ namespace MediaPlayer
             actors2 = new HashSet<Actor>();
 
             updateList();
-
 
             Director.ItemsSource = directors;
             Screenwriter.ItemsSource = screenwriters;
@@ -147,7 +147,8 @@ namespace MediaPlayer
 
 
             BufferWindow.onNamesend += Page2_onNamesend;
-
+            StudioWindow.onNameStudio += Page3_onNamesend;
+            OneBufferWindow.onNameBuf += Page_onNamesend;
         }
 
         void updateList() {
@@ -175,6 +176,7 @@ namespace MediaPlayer
             Editor.Items.Refresh();
             Composer.Items.Refresh();
             Genre.Items.Refresh();
+            Rating.Items.Refresh();
         }
         
         
@@ -190,6 +192,7 @@ namespace MediaPlayer
             composers.Clear();
             genres.Clear();
             locations.Clear();
+            ratings.Clear();
         }
        
 
@@ -393,7 +396,7 @@ namespace MediaPlayer
 
         private void FRating_Click(object sender, RoutedEventArgs e)
         {
-            OneBufferWindow actorSelect = new OneBufferWindow("Country", "Location");
+            OneBufferWindow actorSelect = new OneBufferWindow("rating", "Rating");
             actorSelect.Show();
         }
 
@@ -488,8 +491,7 @@ namespace MediaPlayer
                                             case 0: {director.DirectorID = reader.GetValue(colCtr).ToString(); } break;
                                             case 1: { director.Name = reader.GetValue(colCtr).ToString(); } break;
                                             case 2: { director.LastName = reader.GetValue(colCtr).ToString(); } break;
-                                            case 3: { director.YearOfBorn = reader.GetValue(colCtr).ToString(); } break;
-                                           
+       
                                         }
                                     }
                                     list.Add(director);
@@ -538,7 +540,7 @@ namespace MediaPlayer
                                 case 0: { screenwriter.ScreenwriterID = reader.GetValue(colCtr).ToString(); } break;
                                 case 1: { screenwriter.Name = reader.GetValue(colCtr).ToString(); } break;
                                 case 2: { screenwriter.LastName = reader.GetValue(colCtr).ToString(); } break;
-                                case 3: { screenwriter.FilmID = reader.GetValue(colCtr).ToString(); } break;
+                               
                             }
                         }
                         list.Add(screenwriter);
@@ -587,7 +589,7 @@ namespace MediaPlayer
                                 case 0: { operat.OperatorID = reader.GetValue(colCtr).ToString(); } break;
                                 case 1: { operat.Name = reader.GetValue(colCtr).ToString(); } break;
                                 case 2: { operat.LastName = reader.GetValue(colCtr).ToString(); } break;
-                                case 3: { operat.FilmID = reader.GetValue(colCtr).ToString(); } break;
+                               
                             }
                         }
                         list.Add(operat);

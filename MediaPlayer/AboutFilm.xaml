@@ -77,5 +77,6 @@
             <TextBlock   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="13" Grid.Column="0" FontSize="21" Text="Рейтинг MPAA:"/>
 
         </Grid>
+        <Button Content="Удалить фильм" Grid.Column="1" HorizontalAlignment="Center" Height="26" VerticalAlignment="Bottom" Click="Button_Click_1" />
     </Grid>
 </Page>
